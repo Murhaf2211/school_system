@@ -26,4 +26,22 @@ const handeleValidationErrors = (req, res, next) => {
     }
   }
 
-  module.exports = {createUser, handeleValidationErrors};
+  const loginUser = async(req, res, next)=>{
+    try{
+      const findUserByEmail = await usersModel.findOne({email: req.body.email});
+      if(!findUserByEmail) return res.status(404).json({msg:'Your email not exist, please first sign-up'});
+
+      const passwordMatches = await bcrypt.compare(req.body.password, findUserByEmail.password);
+      if(!passwordMatches) return res.status(400).json({msg:'Password invalid'});
+
+    const initialToken = await jwt.sign({email: findUserByEmail.email, role: findUserByEmail.role}, process.env.SECRET);
+    const token = 'Bearer+role ' + initialToken;
+    res.cookie('authTokenWithRole', token, {httpOnly: true});
+    res.status(200).json({msg:`${findUserByEmail.userName},congratulation you got cookie`});
+
+  }catch (error) {
+    next(error);
+  }
+}
+
+  module.exports = {createUser, handeleValidationErrors, loginUser};
