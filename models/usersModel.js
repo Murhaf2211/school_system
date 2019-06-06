@@ -5,8 +5,9 @@ const userSchema = new mongoose.Schema({
     userName: {type: String, required:true},
     password: {type: String, required:true},
     role: {type: String, required:true},
-    active: {type: Boolean, default: false}
-
+    school: {type: String,default:''},
+    classCode: {type: [String],default:''}
+    
 },{versionKey:false});
 
 const usersModel= mongoose.model('users', userSchema);

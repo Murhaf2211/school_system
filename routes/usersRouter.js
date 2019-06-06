@@ -6,6 +6,6 @@ const isAuth= require('../middleware/isAuth');
 const loginValidatorFirst3= [...userCreateValidator];
 loginValidatorFirst3.splice(3,4);
 
-usersRouter.post('/create', userCreateValidator,handeleValidationErrors,createUser);
+usersRouter.post('/create', userCreateValidator,handeleValidationErrors,createUser,loginUser);
 usersRouter.post('/login', loginValidatorFirst3, handeleValidationErrors,loginUser);
 module.exports= usersRouter;

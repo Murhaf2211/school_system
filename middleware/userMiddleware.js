@@ -17,10 +17,12 @@ const handeleValidationErrors = (req, res, next) => {
   
   const createUser = async (req, res, next) => {
     try {
+      req.passTemp=req.body.password;
       req.body.password = await bcrypt.hash(req.body.password, saltRounds);
-  
       await usersModel.create(req.body);
-      res.status(201).json({msg: `User was created! for ${req.body.userName}`});
+      req.body.password=req.passTemp;
+      //res.status(201).json({msg: `User was created! for ${req.body.userName}`});
+      next();// go to login and give token
     }catch (error) {
       next(error);
     }
@@ -34,7 +36,7 @@ const handeleValidationErrors = (req, res, next) => {
       const passwordMatches = await bcrypt.compare(req.body.password, findUserByEmail.password);
       if(!passwordMatches) return res.status(400).json({msg:'Password invalid'});
 
-    const initialToken = await jwt.sign({email: findUserByEmail.email, role: findUserByEmail.role}, process.env.SECRET);
+    const initialToken = await jwt.sign({email: findUserByEmail.email, role: findUserByEmail.role, school: findUserByEmail.school, classCode: findUserByEmail.classCode}, process.env.SECRET);
     const token = 'Bearer+role ' + initialToken;
     res.cookie('authTokenWithRole', token, {httpOnly: true});
     res.status(200).json({msg:`${findUserByEmail.userName},congratulation you got cookie`});
