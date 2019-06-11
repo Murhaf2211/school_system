@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
 import {BrowserRouter ,NavLink ,Route ,Redirect} from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Teacher from './components/Teacher';
-import Student from './components/Student';
+import Navbare from './components/Navbar';
+import Teacher from './components/TeacherPage';
+import Student from './components/StudentPage';
 
 
 export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
-       <Navbar/>
+       <Navbare/>
        <Teacher/>
        <Student/>
       </BrowserRouter>

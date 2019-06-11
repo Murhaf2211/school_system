@@ -1,14 +1,27 @@
 import React,{Component} from 'react';
+import { Navbar, Nav, Form, FormControl,Button } from 'react-bootstrap';
+import atmo from '../img/atmo.png'
 
 
-export default class Navbar extends Component{
+export default class Navbare extends Component{
 
   render() {
     return(
-        <ul>
-          <li><a className="active" href="#home">DCI LOGO</a></li>
-          <li className="about"><a href="#about">about us</a></li>
-        </ul>
+    <>
+    <Navbar sticky="top" bg="dark" variant="dark">
+    <Navbar.Brand href="#home"><img src={atmo} className="navLogo"/> </Navbar.Brand>
+    <Nav className="mr-auto">
+      <Nav.Link href="#home">Home</Nav.Link>
+      <Nav.Link href="#features">About US</Nav.Link>
+      <Nav.Link href="#pricing">Contact</Nav.Link>
+    </Nav>
+    <Form inline>
+      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <Button variant="outline-info">Search</Button>
+    </Form>
+  </Navbar>
+  </>
+
       )
     }
   }
