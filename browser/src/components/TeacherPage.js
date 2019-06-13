@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
-import { Card, Button, Jumbotron, ProgressBar, ListGroup} from 'react-bootstrap';
+import { Card, Button, Jumbotron, ProgressBar, ListGroup, Form} from 'react-bootstrap';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+
+import Background from '../img/students3.jpg';
+
 
 function alertClicked() {
 alert('You clicked the third ListGroupItem');
@@ -10,15 +13,18 @@ export default class Teacher extends Component{
 
   render() {
     return(
-      <section className="mainStyle">
-        <Jumbotron className='text-center bg-danger'>
+      <>
+      <section>
+        <Jumbotron className='text-center teacherBackround '>
+        <div className='opacity'>
           <h1>Hello, TeacherName!</h1>
-          <p>This is a simple hero unit, a simple jumbotron-style component for calling
+          <p >This is a simple hero unit, a simple jumbotron-style component for calling
            extra attention to featured content or information.
           </p>
           <p>
             <Button variant="dark">Logout</Button>
-          </p><br/><br/><br/><br/><br/>
+          </p><br/>
+          </div><br/><br/><br/><br/>
 
           <MDBContainer>
            <MDBRow>
@@ -44,27 +50,28 @@ export default class Teacher extends Component{
 
               </ListGroup.Item>
               <ListGroup.Item action onClick={alertClicked}>
-                Add Coure
+                Add Course
               </ListGroup.Item>
             </ListGroup>,
 
             </MDBCol>
-            <MDBCol md="6">
+            <MDBCol className='opacity' md="6">
+              <Form.Label as="legend" column sm={5}> Course Evaluation </Form.Label>
               <ProgressBar>
                 <ProgressBar animated variant="success" now={80} key={3} />
               </ProgressBar><br/>
+              <Form.Label as="legend" column sm={5}> Teacher Evaluation </Form.Label>
               <ProgressBar>
                 <ProgressBar  animated variant="warning" now={50} key={2} />
               </ProgressBar><br/>
-              <ProgressBar>
-                <ProgressBar animated variant="danger" now={30} key={3} />
-              </ProgressBar>
+
              </MDBCol>
            </MDBRow>
           </MDBContainer>
         </Jumbotron>
+        </section>
+</>
 
-      </section>
       )
     }
   }

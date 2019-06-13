@@ -8,18 +8,18 @@ export default class Navbare extends Component{
   render() {
     return(
     <>
-    <Navbar sticky="top" bg="dark" variant="dark">
-    <Navbar.Brand href="#home"><img src={atmo} className="navLogo"/> </Navbar.Brand>
-    <Nav className="mr-auto">
+     <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
+      <img src={atmo} className="navLogo"/>
+      <Nav className="mr-auto">
       <Nav.Link href="#home">Home</Nav.Link>
       <Nav.Link href="#features">About US</Nav.Link>
       <Nav.Link href="#pricing">Contact</Nav.Link>
-    </Nav>
-    <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-info">Search</Button>
-    </Form>
-  </Navbar>
+      </Nav>
+      <Form inline>
+       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+       <Button variant="outline-info">Search</Button>
+      </Form>
+     </Navbar>
   </>
 
       )
