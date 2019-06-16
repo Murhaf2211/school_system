@@ -14,16 +14,27 @@ const userCreateValidator= [
     check('userName').trim().isLength({min:3, max:35}).withMessage('The username should be between 4 and 35 characters').escape(),
 
     check('role').custom(roleProvided =>{
-        console.log(roleProvided);
-            if(roleProvided!="student" && roleProvided!="teacher" && roleProvided!="admin") throw new Error('You should choose Student or Teacher');
+            if(roleProvided!="student" && roleProvided!="teacher" && roleProvided!="admin") throw new Error('You should choose : Admin or Student or Teacher');
             else return true;
         }).escape(),
 
-    // here kostas
-    check(['email','userName']).custom(async (emailProvided,userNameProvided) =>{
+    check('email').custom(async (emailProvided) =>{
         const user = await usersModel.findOne({email: emailProvided});
         if(user){ throw new Error('This email already exists');}
-        else if (user.role=='admin' && user.userName==userNameProvided) {throw new Error('This school name already exists');}   
+    }).escape(),
+
+    check('userName').custom(async (userNameProvided) =>{
+        const user = await usersModel.findOne({userName: userNameProvided});
+        if(user){ throw new Error('This userName already exists');}
+    }).escape(),
+
+    check().custom(async (req) =>{
+        const user = await usersModel.findOne({userName: req.userName, role: 'admin'});
+        if(req.role=='admin'){ 
+            if(user) {
+                throw new Error('This school already exists');
+            }
+        }
     }).escape()
 
 ];

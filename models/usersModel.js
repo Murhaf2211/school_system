@@ -5,8 +5,8 @@ const userSchema = new mongoose.Schema({
     userName: {type: String, required:true},
     password: {type: String, required:true},
     role: {type: String, required:true},
-    school: {type: String,default:''},
-    classCode: {type: [String],default:''}
+    school: {type: String},
+    classCode: {type: String}
     
 },{versionKey:false});
 
