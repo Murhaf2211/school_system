@@ -28,16 +28,22 @@ export default class Student extends Component{
 
             <MDBCol md="6">
             <Form>
-              <Form.Group controlId="formBasicEmail">
-                <div className="my-5 ">
+              <Form.Group>
                 <label htmlFor="customRange1">Course Evaluation</label>
-                <input type="range" className="custom-range" id="customRange1" />
+                <div class="d-flex justify-content-center my-6">
+                  <span class="font-weight-bold blue-text mr-2 mt-1">0%</span>
+                  <form class="range-field w-50">
+                  <input type="range" step="1" className="custom-range" id="customRange1" />
+                  </form>
+                  <span class="font-weight-bold blue-text ml-2 mt-1">100%</span>
                 </div>
-              </Form.Group>
-              <Form.Group controlId="formBasicPassword">
-                <div className="my-5">
                 <label htmlFor="customRange1">Teacher Evaluation</label>
-                <input type="range" className="custom-range" id="customRange1" />
+                <div class="d-flex justify-content-center my-6">
+                  <span class="font-weight-bold blue-text mr-2 mt-1">0%</span>
+                  <form class="range-field w-50">
+                  <input type="range" step="1" className="custom-range" id="customRange1" />
+                  </form>
+                  <span class="font-weight-bold blue-text ml-2 mt-1">100%</span>
                 </div>
               </Form.Group>
               <Form.Group controlId="exampleForm.ControlTextarea1">
