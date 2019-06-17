@@ -1,3 +1,24 @@
+
+
+.navLogo{
+
+height:6vw ;
+}
+.teacherBackround{
+background-Position: center;
+background-size: cover;
+background-Repeat: no-repeat;
+background-image: url('./img/students3.jpg');
+}
+.studentBackround{
+background-image:url('./img/students4.jpg');
+background-Position: center;
+background-size: cover;
+background-Repeat: no-repeat;
+}
+.opacity{
+background-color: rgba(230, 255, 255, 0.5);
+
 ul {
   list-style-type: none;
   margin: 0;
