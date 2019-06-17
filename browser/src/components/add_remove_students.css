@@ -1,0 +1,119 @@
+.add_student_box{
+position: absolute;
+top:70px;
+z-index: 10;
+width: 500px;
+right: 500px;
+background: rgb(0,0,0,0.4);
+left:26vw;
+height: 600px;
+-webkit-animation-name: animatetop;
+-webkit-animation-duration: 0.4s;
+animation-name: animatetop;
+animation-duration: 0.5s;
+align-items: center;
+text-align: center;
+
+}
+
+.close_add_class1{
+	color:antiquewhite;
+	position: absolute;
+	right: 3px;
+	font-size: 30px;
+cursor: pointer;
+
+}
+
+@-webkit-keyframes animatetop {
+  from {top:-250px; opacity:0}
+  to {top:150px; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-250px; opacity:0}
+  to {top:150px; opacity:1}
+}
+body{
+
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.name_class_input, .name_class_input2{
+	background: rgb(0,0,0,0.4);
+	height: 3vw;
+	width: 70%;
+	color:darkgray;
+	font-size: 1.7vw;
+
+}
+.className_label{
+	color:black;
+	font-size: 1.7vw;
+	font-family: 'Special Elite', cursive;
+	font-family: 'Noto Sans HK', sans-serif;
+}
+.submit_addClass_button{
+	padding:1.5vw !important;
+
+}
+.add_pargraph{
+	color:red;
+	font-size: 5vw;
+}
+.paragraph{
+	font-size: 1.5vw;
+	color:red;
+	cursor: pointer;
+	text-align: center;
+	opacity: 0.5;
+	background: darkgrey;
+	border-radius: 45vw;
+	margin-bottom: 2vw;
+}
+.paragraph:hover{
+
+	transition: 0.4s;
+	opacity: 1;
+}
+.content_section{
+	height: auto;
+	width: 25vw;
+	background: rgba(0,0,0,0.5);
+}
+
+
+.remove_student_box{
+position: absolute;
+top:70px;
+
+z-index: 10;
+width: 800px;
+right: 500px;
+background: rgb(0,0,0,0.4);
+left:26vw;
+height: 600px;
+-webkit-animation-name: animatetop;
+-webkit-animation-duration: 0.4s;
+animation-name: animatetop;
+animation-duration: 0.5s;
+align-items: center;
+text-align: center;
+
+}
+.close_add_class2{
+	color:antiquewhite;
+	position: absolute;
+	right: 3px;
+	font-size: 30px;
+cursor: pointer;
+
+}
+
+.className_labe2,.className_label3{
+	color:white;
+	font-size: 2vw;
+	font-family: 'Special Elite', cursive;
+	font-family: 'Noto Sans HK', sans-serif;
+  margin-top: 2vw;
+}

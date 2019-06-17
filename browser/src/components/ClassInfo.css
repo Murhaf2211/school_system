@@ -1,0 +1,174 @@
+.classifno_Cntainer{
+
+height: 47vw;
+width: 70vw;
+margin-left: 0;
+background: rgb(1,1,1,0.4);
+display: flex;
+flex-direction: row;
+margin-left: 30vw;
+justify-content: space-around;
+z-index: -1;
+flex-direction:row-reverse;
+
+}
+.classifno_Cntainer h4{
+  color:white;
+text-align:left;
+margin-left: 2vw;
+margin-bottom: 2vw;
+cursor: pointer;
+}
+
+.ClassInfo_content{
+  display: flex;
+flex-direction: row;
+justify-content: space-between;
+}
+
+.ClassInfo_content p{
+  font-size: 1.5vw;
+  color:antiquewhite;
+  margin-left: 2vw;
+  color:white;
+}
+
+
+.class_details{
+  width: 30%;
+  height: 100%;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+
+}
+
+.every_info_about_class{
+background: rgb(0,0,0,0.5);
+text-align: center;
+height: 14vw;
+width: 20vw;
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+  box-shadow: 1px 1px 1px 1px rgb(255,255,255,0.2);
+}
+.div_for_buttons button {
+  -moz-box-shadow:inset 0px 1px 0px 0px #540E11;
+  	-webkit-box-shadow:inset 0px 1px 0px 0px #540E11;
+  	box-shadow:inset 0px 1px 0px 0px #540E11;
+
+  	background:-moz-linear-gradient(top, #540E11 5%, #540E11 100%);
+  	background:-webkit-linear-gradient(top, #540E11 5%, #540E11 100%);
+  	background:-o-linear-gradient(top, #540E11 5%, #540E11 100%);
+  	background:-ms-linear-gradient(top, #540E11 5%, #540E11 100%);
+  	background:linear-gradient(to bottom, #540E11 5%, #540E11 100%);
+
+  	background-color:#540E11;
+  	-moz-border-radius:11px;
+  	-webkit-border-radius:11px;
+  	border-radius:11px;
+  	border:1px solid #332e2e;
+  	display:inline-block;
+  	cursor:pointer;
+  	color:#ffffff;
+  	font-family:Arial;
+  	font-size:15px;
+  	font-weight:bold;
+  	padding:5px 9px;
+  	text-decoration:none;
+  	text-shadow:0px 1px 9px #752929;
+}
+.div_for_buttons button:hover{
+  background-color: #750E11;
+}
+.div_for_buttons button:focus{
+border-color: none;
+}
+
+
+
+
+
+
+.right_section{
+  margin-right: 0;
+  width: 100%;
+  height: 100%;
+  width: 70%;
+  background: rgb(0,0,0,0.5);
+  margin-left: 1vw;
+  overflow: scroll;
+ flex-direction: column;
+
+}
+.close_classContanier{
+  color:white;
+  font-size: 2.5vw;
+  position: absolute;
+  right: 0.5vw;
+  top:5.5vw;
+  cursor: pointer;
+}
+.Titel_students{
+ margin-left: 2vw;
+ margin-top: 1vw;
+ margin-bottom:5vw;
+ background:rgba(92,6,18,0.2);
+  width: 42vw;
+  box-shadow: 1px 1px 1px 1px rgb(255,255,255,0.2);
+  height: auto;
+  list-style-type: none;
+  height: 5vw;
+  position: fixed;
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+
+  }
+  .Titel_students li {
+    text-align: center;
+    font-size:1.3vw;
+    color:white;
+
+  }
+
+.Titel_students li:nth-last-of-type(1){
+  position: absolute;
+  left:-4vw;
+}
+.Titel_students li:nth-last-of-type(2){
+  position: absolute;
+  left:9vw;
+}
+.Titel_students li:nth-last-of-type(3){
+  position: absolute;
+  left:27vw;
+}
+.students_Deatis{
+margin-top:6vw;
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: row;
+
+  justify-content: space-around;
+
+}
+.students_Deatis h6 {
+  color:white;
+}
+.class_details{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.div_for_buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
