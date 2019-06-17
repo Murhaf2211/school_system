@@ -15,7 +15,7 @@ export default class Teacher extends Component{
     return(
       <>
       <section>
-        <Jumbotron className='text-center teacherBackround '>
+        <Jumbotron className='text-center bg-transparent '>
         <div className='opacity'>
           <h1>Hello, TeacherName!</h1>
           <p >This is a simple hero unit, a simple jumbotron-style component for calling

@@ -10,7 +10,7 @@ export default class Student extends Component{
   render() {
     return(
       <section className="mainStyle">
-        <Jumbotron className='text-center bg-info studentBackround'>
+        <Jumbotron className='text-center bg-transparent'>
          <div className='opacity'>
           <h1>Hello, StudentName!</h1>
           <p>This is a simple hero unit, a simple jumbotron-style component for calling

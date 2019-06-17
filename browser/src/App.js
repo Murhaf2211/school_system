@@ -21,11 +21,8 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
-       <Navbare/>
-       <Form/>
+       <Navbare/>    
        <SlideImages />
-       <AdminPage/>
-       <ClassInfo/>
        <Teacher/>
        <Student/>
 
