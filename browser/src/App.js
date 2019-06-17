@@ -22,8 +22,10 @@ export default class App extends Component {
     return (
       <BrowserRouter>
        <Navbare/>
+       <Form/>
        <SlideImages />
-        <ClassInfo/>
+       <AdminPage/>
+       <ClassInfo/>
        <Teacher/>
        <Student/>
 
