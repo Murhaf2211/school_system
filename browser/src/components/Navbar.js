@@ -9,7 +9,7 @@ export default class Navbare extends Component{
     return(
     <>
      <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
-      <img src={atmo} className="navLogo"/>
+      <img src={atmo} style={{ height: '5rem' }} className="navLogo"/>
       <Nav className="mr-auto">
       <Nav.Link href="#home">Home</Nav.Link>
       <Nav.Link href="#features">About US</Nav.Link>
