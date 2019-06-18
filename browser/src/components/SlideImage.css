@@ -8,8 +8,8 @@
 .slideshow:after {
     top: -16px;
     position: absolute;
-    height: 47vw;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     top:70px;
 }
 .slideshow li span {
@@ -52,26 +52,7 @@
     25% { opacity: 0 }
     100% { opacity: 0 }
 }
-@keyframes titleAnimation {
-    0% { opacity: 0 }
-    8% { opacity: 1 }
-    17% { opacity: 1 }
-    19% { opacity: 0 }
-    100% { opacity: 0 }
-}
+
 .no-cssanimations .cb-slideshow li span {
 	opacity: 1;
-}
-.section{
-  background:rgba(0,0,0,0.9);
- opacity: 0.3;
-  height: 7vw;
-  text-align: center;
-  align-items: center;
-position: absolute;
-top:19vw;
-box-shadow: 1px 2px 2px 2px white;
-width:100%;
-color:white;
-font-size: 2vw;
 }
