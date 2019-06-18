@@ -1,33 +1,36 @@
 import React,{Component} from 'react';
 import { Card, Button, Jumbotron, ProgressBar, ListGroup, Form} from 'react-bootstrap';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-
-import Background from '../img/students3.jpg';
+import { connect } from 'react-redux';
+import { fetchFrom } from '../redux/redux.js';
 
 
 function alertClicked() {
 alert('You clicked the third ListGroupItem');
 }
-export default class Teacher extends Component{
 
+class Teacher extends Component{
+
+componentDidMount(){
+  this.props.makeFetch();
+  }
 
   render() {
     return(
       <>
       <section>
         <Jumbotron className='text-center bg-transparent '>
-        <div className='opacity'>
-          <h1>Hello, TeacherName!</h1>
-          <p >This is a simple hero unit, a simple jumbotron-style component for calling
-           extra attention to featured content or information.
-          </p>
-          <p>
-            <Button variant="dark">Logout</Button>
-          </p><br/>
+          <div className='opacity'>
+            <h1>Hello, TeacherName!</h1>
+            <p >This is a simple hero unit, a simple jumbotron-style component for calling
+                extra attention to featured content or information.
+            </p>
+            <p>
+              <Button variant="dark">Logout</Button>
+            </p><br/>
           </div><br/><br/><br/><br/>
-
-          <MDBContainer>
-           <MDBRow>
+        <MDBContainer>
+          <MDBRow>
             <MDBCol md="3">
               <ListGroup defaultActiveKey="#link1">
                 <ListGroup.Item variant="secondary"action href="#link1" disabled>
@@ -64,14 +67,26 @@ export default class Teacher extends Component{
               <ProgressBar>
                 <ProgressBar  animated variant="warning" now={50} key={2} />
               </ProgressBar><br/>
-
              </MDBCol>
            </MDBRow>
           </MDBContainer>
         </Jumbotron>
         </section>
-</>
-
+      </>
       )
+     }
+    }
+
+  const mapStateToProps = state => {
+    return {
+      myData: state.dataFromServer
     }
   }
+
+  const mapDispatchToProps = dispatch => {
+    return {
+      makeFetch: () => dispatch(fetchFrom())
+    }
+  }
+
+export const TeacherContainer = connect(mapStateToProps, mapDispatchToProps)(Teacher);

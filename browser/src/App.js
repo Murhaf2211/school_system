@@ -1,18 +1,11 @@
+import React,{Component} from 'react';
 import {BrowserRouter ,NavLink ,Route ,Redirect} from 'react-router-dom';
 import Navbare from './components/Navbar';
-import Teacher from './components/TeacherPage';
-import Student from './components/StudentPage';
-import React,{Component} from 'react';
+import {TeacherContainer} from './components/TeacherPage';
+import {StudentContainer} from './components/StudentPage';
 import logo from './logo.svg';
 import './App.css';
 import SlideImages from './components/SlideImages';
-
-
-
-
-
-
-
 
 
 
@@ -20,11 +13,10 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
-       <Navbare/>
-       <SlideImages />
-       <Teacher/>
-       <Student/>
-
+      <Route path="/"  component={Navbare} />
+      <Route path="/"  component={SlideImages} />
+      <Route path="/teacher" exact component={TeacherContainer} />
+      <Route path="/student"  exact component={StudentContainer} />
       </BrowserRouter>
     )
   }
