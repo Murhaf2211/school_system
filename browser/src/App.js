@@ -13,8 +13,8 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
-      <Route path="/"  component={Navbare} />
-      <Route path="/"  component={SlideImages} />
+      <Route path="/"  component={Navbare}/>
+      <Route path="/"  component={SlideImages}/>
       <Route path="/teacher" exact component={TeacherContainer} />
       <Route path="/student"  exact component={StudentContainer} />
       </BrowserRouter>
