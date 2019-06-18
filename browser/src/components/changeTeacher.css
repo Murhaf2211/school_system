@@ -1,0 +1,81 @@
+.change_teacher_box{
+position: absolute;
+top:70px;
+z-index: 10;
+width: 500px;
+right: 500px;
+background: rgba(0,0,0,0.7);
+left:26vw;
+height: 400px;
+
+
+-webkit-animation-name: animatetop;
+-webkit-animation-duration: 0.4s;
+animation-name: animatetop;
+animation-duration: 0.5s;
+
+text-align: center;
+
+}
+
+.close_add_class1{
+	color:white;
+	position: absolute;
+	right: 3px;
+  top:0;
+	font-size: 30px;
+cursor: pointer;
+
+}
+
+@-webkit-keyframes animatetop {
+  from {top:-250px; opacity:0}
+  to {top:150px; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-250px; opacity:0}
+  to {top:150px; opacity:1}
+}
+body{
+
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.name_class_input{
+  margin-top: 1vw;
+	background: rgb(0,0,0,0.4);
+  font-size: 1.7vw;
+  width: 30vw;
+  color:white;
+
+}
+.className_label{
+	color:darkgray;
+  margin-top: 3vw;
+	font-size: 1.7vw;
+	font-family: 'Special Elite', cursive;
+	font-family: 'Noto Sans HK', sans-serif;
+}
+.submit_addClass_button{
+	padding:1.2vw;
+  margin-top: 1vw;
+  font-size: 1.5vw;
+
+}
+.add_pargraph{
+	color:red;
+	font-size: 5vw;
+}
+
+.content_section{
+	height: auto;
+	width: 25vw;
+	background: rgba(0,0,0,0.5);
+}
+.paragraph_confirm{
+  color:antiquewhite;
+  font-size: 2vw;
+  margin-top: 3vw;
+  background-color: firebrick;
+}
