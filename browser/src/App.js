@@ -21,11 +21,12 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
+       <Navbare/>
+      
+       <Teacher/>
+       <Student/>
 
-       <SlideImages />
-        <ClassInfo/>
-
-    </BrowserRouter>
-  )
+      </BrowserRouter>
+    )
   }
 }
