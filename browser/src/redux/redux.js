@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 const initialState = {dataFromServer:[], TeacherEvaluation:[],courseEvaluation:[],studentComent:[]};
 
-const Reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   const copyOfState = {...state};
 
   switch (action.type) {
@@ -72,4 +72,4 @@ export const fetchFrom = () => {
     })
   }
 }
-export const store = createStore(Reducer, applyMiddleware(thunk));
+export const store = createStore(reducer, applyMiddleware(thunk));

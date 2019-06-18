@@ -22,7 +22,7 @@
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    animation: imageAnimation 10s linear infinite 0s;
+    animation: imageAnimation 30s linear infinite 0s;
 }
 .slideshow li:nth-child(1) span {
     background-image: url("https://cdn.pixabay.com/photo/2017/05/02/03/41/action-2277292_960_720.jpg");
