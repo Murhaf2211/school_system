@@ -6,6 +6,7 @@ const cookieParser= require('cookie-parser');
 const morgan= require('morgan');
 const usersRouter= require('./routes/usersRouter');
 const errorHandler=require('./middleware/errorHandler');
+const path = require('path');
 //const DB_URL = 'mongodb://localhost:27017/dciProject';
 const DB_URL = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0-wuxiw.mongodb.net/finalProject`;
 
@@ -31,6 +32,12 @@ app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 app.use('/users', usersRouter);
 
-
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('browser/build'));
+  
+    app.get('*', (req, res, next) => {
+      res.sendFile(path.resolve('browser', 'build', 'index.html'));
+    })
+}
 
 app.use(errorHandler);
