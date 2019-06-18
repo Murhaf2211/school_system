@@ -32,12 +32,18 @@ app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 app.use('/users', usersRouter);
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('browser/build'));
-  
-    app.get('*', (req, res, next) => {
+app.use(express.static('browser/build'));
+ app.get('*', (req, res, next) => {
       res.sendFile(path.resolve('browser', 'build', 'index.html'));
     })
-}
+    
+//if (process.env.NODE_ENV === 'production') {
+    //app.use(express.static('browser/build'));
+  
+   // app.get('*', (req, res, next) => {
+     // res.sendFile(path.resolve('browser', 'build', 'index.html'));
+    //})
+ // }
+
 
 app.use(errorHandler);
