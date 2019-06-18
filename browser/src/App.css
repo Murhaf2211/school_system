@@ -11,7 +11,7 @@ background-Repeat: no-repeat;
 background-image: url('./img/students3.jpg');
 }
 .studentBackround{
-background-image:url('./img/students4.jpg');
+background-image:url('./img/students4.png');
 background-Position: center;
 background-size: cover;
 background-Repeat: no-repeat;
@@ -21,7 +21,6 @@ background-Repeat: no-repeat;
 li {
   float: left;
 margin-left: 5vw;
-
 }
 
 li:last-child {

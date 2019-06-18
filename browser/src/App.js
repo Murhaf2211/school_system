@@ -24,10 +24,8 @@ export default class App extends Component {
        <Navbare/>
        <SlideImages />
         <ClassInfo/>
-       <Teacher/>
-       <Student/>
 
-      </BrowserRouter>
-    )
+    </BrowserRouter>
+  )
   }
 }
