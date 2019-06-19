@@ -36,6 +36,14 @@ const reducer = (state = initialState, action) => {
      return copyOfState;
    default:
      return copyOfState;
+
+     case:'CHANGE'
+     if(action.payload.target.getAtribute('type')==='text'){
+       copyOfState.userNameValue=action.payload.target.value
+     }esle if {
+       action.payload.target.getAtribute('type')==='password'
+       copyOfState.password=action.payload.target.value
+     }
  }
 }
 
@@ -63,11 +71,33 @@ const badRequest = error => {
  }
 }
 
+export const loginFetch = credentials => {
+  return function(dispatch) {
+    fetch('/', {
+      method: 'post',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(credentials)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
 
+      return res.json();
+    })
+    .then(userData => {
+      console.log(userData);
 
-export const changeAction = payload => {
-  return { type: 'CHANGE', payload: payload }
+    })
+    .catch(err => {
+      console.warn(err);
+
+    })
+  }
 }
+
+
 
 export const fetchFrom = () => {
  return function (dispatch){
@@ -87,4 +117,13 @@ export const fetchFrom = () => {
    })
  }
 }
+
+export const changeAction = payload => {
+  return { type: 'CHANGE', payload: payload }
+}
+
+
+
+
+
 export const store = createStore(reducer, applyMiddleware(thunk));
