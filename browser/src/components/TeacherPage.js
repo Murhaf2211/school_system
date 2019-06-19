@@ -1,77 +1,74 @@
-import React,{Component} from 'react';
 import { Card, Button, Jumbotron, ProgressBar, ListGroup, Form} from 'react-bootstrap';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-
-import Background from '../img/students3.jpg';
-
-
-function alertClicked() {
-alert('You clicked the third ListGroupItem');
-}
-export default class Teacher extends Component{
+import { connect } from 'react-redux';
+import { fetchFrom } from '../redux/redux.js';
 
 
-  render() {
-    return(
-      <>
-      <section>
-        <Jumbotron className='text-center teacherBackround '>
-        <div className='opacity'>
-          <h1>Hello, TeacherName!</h1>
-          <p >This is a simple hero unit, a simple jumbotron-style component for calling
-           extra attention to featured content or information.
-          </p>
-          <p>
-            <Button variant="dark">Logout</Button>
-          </p><br/>
-          </div><br/><br/><br/><br/>
+class Teacher extends Component{
 
-          <MDBContainer>
-           <MDBRow>
-            <MDBCol md="3">
-              <ListGroup defaultActiveKey="#link1">
-                <ListGroup.Item variant="secondary"action href="#link1" disabled>
-                  Students List
-                </ListGroup.Item>
-                <ListGroup.Item action href="#link2" disabled>
+componentDidMount(){
+ this.props.makeFetch();
+ }
 
-                </ListGroup.Item>
-                <ListGroup.Item action onClick={alertClicked}>
-                  Add Student
-                </ListGroup.Item>
-              </ListGroup>,
-            </MDBCol>
-            <MDBCol md="3">
-            <ListGroup defaultActiveKey="#link1">
-              <ListGroup.Item variant="secondary"action href="#link1" disabled>
-                My Courses List
-              </ListGroup.Item>
-              <ListGroup.Item action href="#link2" disabled>
+ render() {
+   return(
+     <>
+     <section>
+       <Jumbotron className='text-center bg-transparent '>
+         <div className='opacity'><br/>
+           <h1>Hello, TeacherName!</h1>
+           <p >This is a simple hero unit, a simple jumbotron-style component for calling
+               extra attention to featured content or information.
+           </p><br/><br/>
+         </div><br/><br/>
+       <MDBContainer>
+         <MDBRow center>
+             <MDBCol className='opacity' size="4">
+               <Form.Label as="legend" column sm={5}> Course Evaluation </Form.Label>
+               <ProgressBar>
+                 <ProgressBar animated variant="dark" now={80} key={3} />80%
+               </ProgressBar><br/>
+               <Form.Label as="legend" column sm={5}> Teacher Evaluation </Form.Label>
+               <ProgressBar>
+                 <ProgressBar  animated variant="danger" now={50} key={2} />50%
+               </ProgressBar><br/>
+              </MDBCol>
+           <MDBCol size="4">
+             <ListGroup as="ul">
+               <ListGroup.Item variant="dark" as="li" >Course Name</ListGroup.Item>
+               <ListGroup.Item as="li">FBW1</ListGroup.Item>
+               <ListGroup.Item as="li"></ListGroup.Item>
+             </ListGroup>
+           </MDBCol>
+           <MDBCol size="4">
+             <ListGroup as="ul">
+               <ListGroup.Item variant="dark"as="li" >Students List</ListGroup.Item>
+               <ListGroup.Item as="li">Muham suba</ListGroup.Item>
+               <ListGroup.Item as="li">Jack mari</ListGroup.Item>
+               <ListGroup.Item as="li">Dani fad</ListGroup.Item>
+               <ListGroup.Item as="li"></ListGroup.Item>
+             </ListGroup>
+           </MDBCol>
+         </MDBRow><br/><br/>
 
-              </ListGroup.Item>
-              <ListGroup.Item action onClick={alertClicked}>
-                Add Course
-              </ListGroup.Item>
-            </ListGroup>,
-
-            </MDBCol>
-            <MDBCol className='opacity' md="6">
-              <Form.Label as="legend" column sm={5}> Course Evaluation </Form.Label>
-              <ProgressBar>
-                <ProgressBar animated variant="success" now={80} key={3} />
-              </ProgressBar><br/>
-              <Form.Label as="legend" column sm={5}> Teacher Evaluation </Form.Label>
-              <ProgressBar>
-                <ProgressBar  animated variant="warning" now={50} key={2} />
-              </ProgressBar><br/>
-
-             </MDBCol>
-           </MDBRow>
-          </MDBContainer>
-        </Jumbotron>
-        </section>
-</>
-
-      )
+         </MDBContainer>
+       </Jumbotron>
+       </section>
+     </>
+     )
     }
-  }
+   }
+
+ const mapStateToProps = state => {
+   return {
+     myData: state.dataFromServer
+   }
+ }
+
+ const mapDispatchToProps = dispatch => {
+   return {
+     makeFetch: () => dispatch(fetchFrom())
+   }
+ }
+
+export const TeacherContainer = connect(mapStateToProps, mapDispatchToProps)(Teacher);
