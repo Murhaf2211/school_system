@@ -1,9 +1,16 @@
 
-
-mport {createStore, applyMiddleware} from 'redux';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 
-const initialState = {dataFromServer:[], TeacherEvaluation:[],courseEvaluation:[],studentComent:[]};
+const initialState = {dataFromServer:[],
+                     TeacherEvaluation:[],
+                     courseEvaluation:[],
+                     studentComent:[],
+                     userNameValue:'',
+                     passwordValue:'',
+                     loginRedirection:false};
 
 const reducer = (state = initialState, action) => {
  const copyOfState = {...state};
@@ -54,6 +61,12 @@ const badRequest = error => {
    type: 'ERROR',
    payload :error
  }
+}
+
+
+
+export const changeAction = payload => {
+  return { type: 'CHANGE', payload: payload }
 }
 
 export const fetchFrom = () => {
