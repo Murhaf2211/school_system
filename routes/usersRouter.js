@@ -22,4 +22,6 @@ usersRouter.put('/admin/updateTeacher',isAuth,isAdmin, isSchoolSameTeacher, upda
 usersRouter.post('/admin/addStudents',isAuth,isAdmin, isSchoolSameClass, addStudents);
 usersRouter.delete('/admin/deleteStudent',isAuth,isAdmin, isSchoolSameClass, deleteStudent);
 usersRouter.put('/admin/updateStudent',isAuth,isAdmin, isSchoolSameStudent, updateStudent);
+
+
 module.exports= usersRouter;
