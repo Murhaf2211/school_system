@@ -112,7 +112,6 @@ const addTeacher = async(req, res, next)=>{
   }
 
 }
-
 const deleteTeacher = async(req, res, next)=>{
 
   try {
