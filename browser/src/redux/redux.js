@@ -78,7 +78,7 @@ const badRequest = error => {
 
 export const loginFetch = credentials => {
   return function(dispatch) {
-    fetch('/', {
+    fetch('/login', {
       method: 'post',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json'},

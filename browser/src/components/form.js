@@ -38,6 +38,8 @@ import {changeAction,loginFetch} from '../redux/redux.js'
 					<label for="pass" className="label">Password</label>
 					<input id="pass" onChange={this.props.handleChange}  value={this.props.passwordValue} type="password" className="input" data-type="password"/>
 				</div>
+
+
 				<div className="group">
 					<input id="check" type="checkbox" className="check" checked/>
 
@@ -51,6 +53,11 @@ import {changeAction,loginFetch} from '../redux/redux.js'
 				</div>
 			</div>
 			<div className="sign-up-htm">
+
+
+
+
+      
 
 				<div className="group">
 					<label for="user" className="label">Username</label>
