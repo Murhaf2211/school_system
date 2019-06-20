@@ -34,18 +34,23 @@ const reducer = (state = initialState, action) => {
    case 'ERROR' :
      copyOfState.dataFromServer = action.payload.message;
      return copyOfState;
-   default:
-     return copyOfState;
 
-     case:'CHANGE'
-     if(action.payload.target.getAtribute('type')==='text'){
-       copyOfState.userNameValue=action.payload.target.value
-     }esle if {
-       action.payload.target.getAtribute('type')==='password'
-       copyOfState.password=action.payload.target.value
-     }
- }
+
+     case 'CHANGE':
+      if (action.payload.target.getAttribute('type') === 'text') {
+        copyOfState.userNameValue = action.payload.target.value;
+      } else if (action.payload.target.getAttribute('type') === 'password') {
+        copyOfState.passwordValue = action.payload.target.value;
+      }
+      return copyOfState;
+
+    default:
+      return copyOfState;
+  }
 }
+
+
+
 
 export const updateCourseEV = ev => {
  return{type:'updateCOURS', event: ev}

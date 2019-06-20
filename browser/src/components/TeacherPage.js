@@ -2,6 +2,8 @@ import { Card, Button, Jumbotron, ProgressBar, ListGroup, Form} from 'react-boot
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { connect } from 'react-redux';
 import { fetchFrom } from '../redux/redux.js';
+import React,{Component} from 'react';
+
 
 
 class Teacher extends Component{

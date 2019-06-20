@@ -1,12 +1,14 @@
 import React,{Component} from 'react';
 import './form.css';
-import {connect} from 'rect-redux';
+import {connect} from 'react-redux';
+import {changeAction,loginFetch} from '../redux/redux.js'
+
+
+
 
 
 
  class Form extends Component{
-
-
 
   handleSubmit = (ev) =>{
     ev.preventDefault();
@@ -20,6 +22,7 @@ import {connect} from 'rect-redux';
     return(
           <>
       <form onSubmit={this.handleSubmit} className="login-wrap">
+
 	<div className="login-html">
 
 		<input type='text'   id="tab-1" type="radio" name="tab" className="sign-in" checked/>
