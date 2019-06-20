@@ -19,7 +19,7 @@ app.listen(PORT, async()=>{
         console.log('Seconds before connecting to DB');
         await mongoose.connect(DB_URL);
         console.log('Connected to Atlas DB');
-       //await mongoose.connect(DB_URL);
+        //await mongoose.connect(DB_URL);
         //console.log('Connected to local DB');
     }catch(error){
         console.log(error);

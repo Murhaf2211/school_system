@@ -43,7 +43,7 @@ const handeleValidationErrors = (req, res, next) => {
     const initialToken = await jwt.sign({email: findUserByEmail.email, role: findUserByEmail.role, school: findUserByEmail.school, classCode: findUserByEmail.classCode}, process.env.SECRET);
     const token = 'Bearer ' + initialToken;
     res.cookie('authToken', token, {httpOnly: true});
-    res.status(200).json({msg:`${findUserByEmail.userName},congratulation you got cookie`});
+    res.status(200).json({msg:`${findUserByEmail.userName}:${findUserByEmail.role},congratulation you got cookie`, });
 
   }catch (error) {
     next(error);
@@ -102,9 +102,11 @@ const addTeacher = async(req, res, next)=>{
     await usersModel.findOneAndUpdate({userName:req.body.teacher},{$set: { school: decodedUser.school, classCode: req.body.classCode}},{new: true});
     //const findClass =await classesModel.findOneAndUpdate({classCode: req.body.classCode, school: decodedUser.school},{$push: {teachers:req.body.teacher}},{new: true});
 
-    //const findClass = await classesModel.aggregate([ { $lookup: { from:"users", localField:"classCode", foreignField:"classCode", as:"teachers" } } ])
+    const findClass = await classesModel.aggregate([ { $lookup: { from:"users", localField:"classCode", foreignField:"classCode", as:"teachers" } }]);
+    console.log(findClass[0].teachers)// findCalss is array
+
     res.status(200).json(`the teacher: ${req.body.teacher}, successfully added to classCode:${req.body.classCode}`);
-    //console.log(findClass[0].teachers)// findCalss is array
+    
   }catch(error) {
     next(error);
   }
