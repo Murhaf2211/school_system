@@ -1,7 +1,16 @@
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 
-const initialState = {dataFromServer:[], TeacherEvaluation:[],courseEvaluation:[],studentComent:[]};
+const initialState = {dataFromServer:[],
+                      TeacherEvaluation:0,
+                      courseEvaluation:0,
+                      studentComent:'',
+                      courseEVarray:[],
+                      teacherEVarray:[],
+                      studentComArray:[],
+                      averageCourseEV:80,
+                      averageTeacherEV:50
+                     };
 
 const reducer = (state = initialState, action) => {
   const copyOfState = {...state};
@@ -9,15 +18,29 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'updateCOURS':
       const changeCourseEv = action.event.target;
-      updateCourseEV.courseEvaluation[changeCourseEv]= action.event.target.value;
+      copyOfState.courseEvaluation = changeCourseEv.value;
       return copyOfState;
     case 'updateTCHER':
       const changeTeacherEV = action.event.target;
-      updateTeacherEV.TeacherEvaluation[changeTeacherEV]= action.event.target.value;
+      copyOfState.TeacherEvaluation = changeTeacherEV.value;
       return copyOfState;
     case 'updateSTcoment':
       const changeStudentCom = action.event.target;
-      updateStudentComnt.studentComent[changeStudentCom]= action.event.target.value;
+      copyOfState.studentComent = changeStudentCom.value;
+      return copyOfState;
+    case 'SUBMIT':
+      copyOfState.courseEVarray.puch(copyOfState.courseEvaluation);
+      copyOfState.teacherEVarray.puch(copyOfState.TeacherEvaluation);
+      copyOfState.studentComArray.puch(copyOfState.studentComent);
+      copyOfState.courseEvaluation = 0;
+      copyOfState.TeacherEvaluation= 0;
+      copyOfState.studentComent= '';
+      return copyOfState;
+    case 'AVCOURS':
+      copyOfState.averageCourseEV = action.event.target;
+      return copyOfState;
+    case 'AVTCHER':
+      copyOfState.averageTeacherEV = action.event.target;
       return copyOfState;
     case 'FETCHDATA':
       copyOfState.dataFromServer = '';
@@ -38,6 +61,15 @@ export const updateTeacherEV = ev => {
 }
 export const updateStudentComnt = ev => {
   return{type:'updateSTcoment', event: ev}
+}
+export const submitValues = ev => {
+  return{type:'SUBMIT' , event: ev}
+}
+export const updateAVcourseEV = ev => {
+  return{type:'AVCOURS', event: ev}
+}
+export const updateAVteacherEV = ev => {
+  return{type:'AVTCHER', event: ev}
 }
 
 const allData = data => {
@@ -72,4 +104,6 @@ export const fetchFrom = () => {
     })
   }
 }
+
+
 export const store = createStore(reducer, applyMiddleware(thunk));

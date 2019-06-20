@@ -3,6 +3,7 @@ import { Card, Button, Jumbotron, ProgressBar, ListGroup, Form} from 'react-boot
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { connect } from 'react-redux';
 import { fetchFrom } from '../redux/redux.js';
+import {updateAVcourseEV, updateAVteacherEV} from '../redux/redux';
 
 
 class Teacher extends Component{
@@ -27,11 +28,11 @@ componentDidMount(){
               <MDBCol className='opacity' size="4">
                 <Form.Label as="legend" column sm={5}> Course Evaluation </Form.Label>
                 <ProgressBar>
-                  <ProgressBar animated variant="dark" now={80} key={3} />80%
+                  <ProgressBar animated variant="dark" now={this.props.averageCourseEV} key={3} />{this.props.averageCourseEV}%
                 </ProgressBar><br/>
                 <Form.Label as="legend" column sm={5}> Teacher Evaluation </Form.Label>
                 <ProgressBar>
-                  <ProgressBar  animated variant="danger" now={50} key={2} />50%
+                  <ProgressBar  animated variant="danger" now={this.props.averageTeacherEV} key={2} />{this.props.averageTeacherEV}%
                 </ProgressBar><br/>
                </MDBCol>
             <MDBCol size="4">
@@ -62,7 +63,9 @@ componentDidMount(){
 
   const mapStateToProps = state => {
     return {
-      myData: state.dataFromServer
+      myData: state.dataFromServer,
+      averageCourseEV: state.averageCourseEV,
+      averageTeacherEV: state.averageTeacherEV
     }
   }
 
