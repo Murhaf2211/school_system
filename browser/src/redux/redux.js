@@ -29,9 +29,9 @@ const reducer = (state = initialState, action) => {
       copyOfState.studentComent = changeStudentCom.value;
       return copyOfState;
     case 'SUBMIT':
-      copyOfState.courseEVarray.puch(copyOfState.courseEvaluation);
-      copyOfState.teacherEVarray.puch(copyOfState.TeacherEvaluation);
-      copyOfState.studentComArray.puch(copyOfState.studentComent);
+      copyOfState.courseEVarray.push(copyOfState.courseEvaluation);
+      copyOfState.teacherEVarray.push(copyOfState.TeacherEvaluation);
+      copyOfState.studentComArray.push(copyOfState.studentComent);
       copyOfState.courseEvaluation = 0;
       copyOfState.TeacherEvaluation= 0;
       copyOfState.studentComent= '';
