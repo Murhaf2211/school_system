@@ -8,7 +8,7 @@ export default class Navbare extends Component{
   render() {
     return(
     <>
-     <Navbar sticky="top" bg="dark" variant="dark">
+     <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
       <img src={atmo} className="navLogo"/>
       <Nav className="mr-auto">
       <Nav.Link href="#home">Home</Nav.Link>
