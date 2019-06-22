@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import './form.css';
+import './css/form.css';
 import {connect} from 'react-redux';
 import {changeAction,loginFetch} from '../redux/redux.js'
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './SlideImage.css';
+import './css/SlideImage.css';
 
 
 export default  class SlideImages extends Component{
