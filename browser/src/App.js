@@ -9,18 +9,20 @@ import {LoginFormContainer} from './components/form';
 import SlideImages from './components/SlideImages';
 
 export default class App extends Component {
+
+
+
   render() {
     return (
       <BrowserRouter>
-
         <Route path="/"  component={Navbare}/>
-        <Route path="/"  component={LoginFormContainer}/>
         <Route path="/"  component={SlideImages}/>
+    
         <Route path="/teacher" exact component={TeacherContainer} />
         <Route path="/student"  exact component={StudentContainer} />
-        <Route path="/student"  exact component={StudentContainer} />
+
 
       </BrowserRouter>
-    )
+        )
   }
 }
