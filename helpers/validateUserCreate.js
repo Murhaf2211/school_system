@@ -46,4 +46,11 @@ const validateClassCreation = [
 
 ]
 
-module.exports= { userCreateValidator, possibleRoles, validateClassCreation };
+const validateClassDelete = [
+  check('classCode').exists().not().isEmpty().withMessage(fieldsMustExist)
+    .trim()
+    .escape()
+]
+
+
+module.exports= { userCreateValidator, possibleRoles, validateClassCreation, validateClassDelete };
