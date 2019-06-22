@@ -1,3 +1,11 @@
+.image_contanier{
+  width: 100%;
+  height: 47vw;
+  background: rgb(0,0,0,0.8)
+}
+
+
+
 .slideshow {
   list-style-type: none;
   width: 100vw;

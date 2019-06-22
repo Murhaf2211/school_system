@@ -9,6 +9,8 @@ import {changeAction,loginFetch} from '../redux/redux.js'
     ev.preventDefault();
     this.props.makeRequest({Username:this.props.userNameValue,
                             password:this.props.passwordValue});
+                            let date =   new Date().toLocaleString();
+                            console.log(date);
   }
 
   render() {
