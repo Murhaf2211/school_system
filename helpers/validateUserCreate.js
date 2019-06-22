@@ -1,7 +1,7 @@
 const {check}= require('express-validator/check');
 const schoolModel = require('../models/schoolModel');
 const fieldsMustExist = 'The username, password and role fields must be filled in and cannot be ommited';
-const fieldsNecessaryLength = 'The username and the password must be between 8 and 35 characters long';
+const fieldsNecessaryLength = 'The username and the password must be between 6 and 35 characters long';
 const possibleRoles = ['School', 'Trainer', 'Student'];
 
 const userCreateValidator= [

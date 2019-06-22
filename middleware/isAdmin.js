@@ -3,12 +3,7 @@ const dotenv = require('dotenv').config();
 
 const isAdmin = async (req, res, next) => {
     try {
-     const decodedUser = await jwt.decode(req.token, process.env.SECRET);
-  
-     if(decodedUser.role=='admin') next();
-  
-      else res.status(201).json('You are not admin');
-  
+     req.user.role === 'School' ? next() : res.status(401).json({msg: 'You are not authorized'});
     }catch(error) {
       next(error);
     }
