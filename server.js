@@ -5,7 +5,7 @@ const dotenv= require('dotenv').config();
 const cookieParser= require('cookie-parser');
 const morgan= require('morgan');
 const usersRouter= require('./routes/usersRouter');
-const errorHandler=require('./middleware/errorHandler');
+const { errorHandler }=require('./middleware/errorHandler');
 const path = require('path');
 const DB_URL = 'mongodb://localhost:27017/feedback';
 const classRouter = require('./routes/classRouter');
@@ -48,6 +48,5 @@ app.get('*', (req, res, next) => {
      // res.sendFile(path.resolve('browser', 'build', 'index.html'));
     //})
  // }
-
 
 app.use(errorHandler);

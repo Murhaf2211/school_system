@@ -1,6 +1,7 @@
 const express= require('express');
 const usersRouter= express.Router();
-const {createUser, handeleValidationErrors, loginUser, logoutUser}= require('../middleware/userMiddleware');
+const {createUser, loginUser, logoutUser}= require('../middleware/userMiddleware');
+const { handeleValidationErrors } = require('../middleware/errorHandler');
 const {userCreateValidator} = require('../helpers/validateUserCreate');
 const isAuth= require('../middleware/isAuth');
 

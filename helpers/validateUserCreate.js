@@ -1,6 +1,7 @@
 const {check}= require('express-validator/check');
-const schoolModel = require('../models/schoolModel');
-const fieldsMustExist = 'The username, password and role fields must be filled in and cannot be ommited';
+const trainerModel = require('../models/trainerModel');
+const classesModel = require('../models/classesModel');
+const fieldsMustExist = 'All fields must be filled in and cannot be ommited';
 const fieldsNecessaryLength = 'The username and the password must be between 6 and 35 characters long';
 const possibleRoles = ['School', 'Trainer', 'Student'];
 
@@ -20,4 +21,29 @@ const userCreateValidator= [
 
 ];
 
-module.exports= { userCreateValidator, possibleRoles };
+const validateClassCreation = [
+  check(['classCode', 'trainer']).exists().not().isEmpty().withMessage(fieldsMustExist)
+    .trim()
+    .escape(),
+
+  check('trainer').custom(async (trainersName) => {
+    const findTrainer = await trainerModel.findOne({userName: trainersName});
+    if (!findTrainer) {
+      throw new Error('The trainer with the given username is not registered in our platform')
+    } else {
+      return true;
+    }
+  }),
+
+  check('classCode').custom(async (givenClassCode) => {
+    const findClassByCode = await classesModel.findOne({classCode: givenClassCode});
+    if (findClassByCode) {
+      throw new Error('The class with the given class code exists. Please name your class differently');
+    } else {
+      return true;
+    }
+  })
+
+]
+
+module.exports= { userCreateValidator, possibleRoles, validateClassCreation };
