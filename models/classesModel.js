@@ -2,10 +2,7 @@ const mongoose= require('mongoose');
 
 const userSchema = new mongoose.Schema({
     classCode: {type: String, required:true},
-    //teachers: {type: [String]},
-    //participants: {type: [String]},
-    school: {type: String}
-    
+    school: {type: String, required: true}
 },{versionKey:false});
 
 const classesModel= mongoose.model('classes', userSchema);

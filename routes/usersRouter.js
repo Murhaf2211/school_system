@@ -1,15 +1,14 @@
 const express= require('express');
 const usersRouter= express.Router();
 const {createUser, handeleValidationErrors, loginUser, createClass, addTeacher, deleteClass, deleteTeacher, updateTeacher, addStudents, deleteStudent, updateStudent, logoutUser}= require('../middleware/userMiddleware');
-const {userCreateValidator}= require('../helpers/validateUserCreate');
+const {userCreateValidator} = require('../helpers/validateUserCreate');
 const isAuth= require('../middleware/isAuth');
 const isAdmin= require('../middleware/isAdmin');
 const {isSchoolSameClass, isSchoolSameTeacher, isSchoolSameStudent}= require('../middleware/isSchoolSame');
-const loginValidatorFirst3= [...userCreateValidator];
-loginValidatorFirst3.splice(3,6);
+// const loginValidatorFirst3= [...userCreateValidator];
 
-usersRouter.post('/create', userCreateValidator,handeleValidationErrors,createUser,loginUser);
-usersRouter.post('/login', loginValidatorFirst3, handeleValidationErrors,loginUser);
+usersRouter.post('/create', userCreateValidator, handeleValidationErrors, createUser);
+// usersRouter.post('/login', loginValidatorFirst3, handeleValidationErrors, loginUser);
 usersRouter.get('/logout', isAuth, logoutUser);
 
 usersRouter.post('/admin/createClass',isAuth,isAdmin, createClass);
