@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import './changeTeacher.css'
+import './css/changeTeacher.css'
 
 
 

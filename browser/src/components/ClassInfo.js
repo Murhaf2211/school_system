@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import './ClassInfo.css';
+import './css/ClassInfo.css';
 import {studentsData} from './studentsData.js';
 import ChangeRemoveClass,{RemoveClass} from './changeName_removeClass.js';
 import ChangeTeacher from './changeTeacher';

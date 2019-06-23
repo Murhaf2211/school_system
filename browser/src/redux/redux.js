@@ -9,7 +9,8 @@ const initialState = {dataFromServer:[],
                       teacherEVarray:[],
                       studentComArray:[],
                       averageCourseEV:80,
-                      averageTeacherEV:50
+                      averageTeacherEV:50,
+                      addClassClicked:false
                      };
 
 const reducer = (state = initialState, action) => {
