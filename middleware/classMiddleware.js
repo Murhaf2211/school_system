@@ -1,11 +1,18 @@
 const classesModel = require('../models/classesModel');
+const schoolModel = require('../models/schoolModel');
 
 const createClass = async(req, res, next)=>{
 
   try {
-    req.body.school= req.user.userName;
+    const findSchoolsId = await schoolModel.findOne({userName: req.user.userName}).select('_id');
+    req.body.school = findSchoolsId._id;
     await classesModel.create(req.body);
-    return res.status(200).json(`${req.user.userName} school ,The new course: ${req.body.classCode} was successfully created`);
+
+    const findFreshClass = await classesModel.findOne({classCode: req.body.classCode}).select('_id');
+    const findRelevantSchool = await schoolModel.findOneAndUpdate({userName: req.user.userName}, {$push: {courses: findFreshClass._id}}, {new: true});
+
+    const populatedSchool = await schoolModel.findOne({userName: req.user.userName}).populate('courses', '-_id -school').select('-_id -password');
+    return res.status(203).json({msg: 'Success', schoolInfo: populatedSchool});
   }catch(error) {
     next(error);
   }
@@ -15,12 +22,17 @@ const createClass = async(req, res, next)=>{
 const deleteClass = async(req, res, next)=>{
 
   try {
-    const findClassByClassCode = await classesModel.findOneAndDelete({classCode: req.body.classCode, school: req.user.userName});
+    const schoolsId = await schoolModel.findOne({userName: req.user.userName}).select('_id');
+    const findClassByClassCode = await classesModel.findOneAndDelete({classCode: req.body.classCode, school: schoolsId._id}).select('_id');
     if (!findClassByClassCode) {
       return res.status(404).json({msg: 'The class you provided does not exist within your school'});
     }
 
-    return res.status(203).json({msg: `The course: ${req.body.classCode} from the ${req.user.userName} school was successfully deleted`});
+    console.log(findClassByClassCode);
+
+    const findRelevantSchool = await schoolModel.findOneAndUpdate({userName: req.user.userName}, {$pull: {courses: findClassByClassCode._id}}, {new: true});
+    const updatedPopulatedSchool = await schoolModel.findOne({userName: req.user.userName}).populate('courses', '-_id -school ').select('-_id -password');
+    return res.status(200).json({msg: 'Success', schoolInfo: updatedPopulatedSchool});
 
   } catch(error) {
       next(error);
