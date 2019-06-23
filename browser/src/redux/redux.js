@@ -32,18 +32,9 @@ const reducer = (state = initialState, action) => {
       copyOfState.studentComent = changeStudentCom.value;
       return copyOfState;
     case 'SUBMIT':
-      copyOfState.courseEVarray.push(copyOfState.courseEvaluation);
-      copyOfState.teacherEVarray.push(copyOfState.TeacherEvaluation);
-      copyOfState.studentComArray.push(copyOfState.studentComent);
       copyOfState.courseEvaluation = 0;
       copyOfState.TeacherEvaluation= 0;
       copyOfState.studentComent= '';
-      return copyOfState;
-    case 'AVCOURS':
-      copyOfState.averageCourseEV = action.event.target;
-      return copyOfState;
-    case 'AVTCHER':
-      copyOfState.averageTeacherEV = action.event.target;
       return copyOfState;
     case 'FETCHDATA':
       copyOfState.dataFromServer = '';
@@ -74,12 +65,6 @@ export const updateStudentComnt = ev => {
 }
 export const submitValues = ev => {
   return{type:'SUBMIT' , event: ev}
-}
-export const updateAVcourseEV = ev => {
-  return{type:'AVCOURS', event: ev}
-}
-export const updateAVteacherEV = ev => {
-  return{type:'AVTCHER', event: ev}
 }
 
 const allData = data => {
