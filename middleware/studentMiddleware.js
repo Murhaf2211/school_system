@@ -1,13 +1,16 @@
 const classesModel = require('../models/classesModel');
 const studentModel = require('../models/studentModel');
+const schoolModel = require('../models/schoolModel');
 
 const addStudent = async(req, res, next)=>{
 
   try {
     const findParticipantToAdded = await studentModel.findOne({userName: req.body.student}).select('_id');
+    const findSchool = await schoolModel.findOne({userName: req.user.userName}).select('_id');
+    console.log(findSchool);
     const findClassByClassCode = await classesModel.findOneAndUpdate({
       classCode: req.body.classCode,
-      school: req.user.userName
+      school: findSchool._id
     },
     {$push: {participants: findParticipantToAdded._id}},
     {new: true})
@@ -16,7 +19,7 @@ const addStudent = async(req, res, next)=>{
       return res.status(404).json({msg: 'The class you provided does not exist within your school'})
     }
     await studentModel.findOneAndUpdate({userName: req.body.userName}, {$set: {class: findClassByClassCode._id}});
-    const populatedClass = await classesModel.findOne({classCode: req.body.classCode, school: req.user.userName})
+    const populatedClass = await classesModel.findOne({classCode: req.body.classCode, school: findSchool._id})
       .populate('participants', 'userName role -_id');
     return res.status(201).json({msg: 'Class has been updated', actualClass: populatedClass});
 

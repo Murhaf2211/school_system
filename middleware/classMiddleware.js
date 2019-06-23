@@ -1,5 +1,6 @@
 const classesModel = require('../models/classesModel');
 const schoolModel = require('../models/schoolModel');
+const studentModel = require('../models/studentModel');
 
 const createClass = async(req, res, next)=>{
 
@@ -11,7 +12,13 @@ const createClass = async(req, res, next)=>{
     const findFreshClass = await classesModel.findOne({classCode: req.body.classCode}).select('_id');
     const findRelevantSchool = await schoolModel.findOneAndUpdate({userName: req.user.userName}, {$push: {courses: findFreshClass._id}}, {new: true});
 
-    const populatedSchool = await schoolModel.findOne({userName: req.user.userName}).populate('courses', '-_id -school').select('-_id -password');
+    const populatedSchool = await schoolModel
+                                    .findOne({userName: req.user.userName})
+                                    .populate({path: 'courses',
+                                              select: '-_id -password',
+                                              populate: {path: 'participants', select: '-_id -password'}
+                                            })
+                                    .select('-_id -password')
     return res.status(203).json({msg: 'Success', schoolInfo: populatedSchool});
   }catch(error) {
     next(error);
