@@ -134,7 +134,6 @@ export const newClass = addClass => {
   return function(dispatch) {
     fetch('/class/createClass ', {
       method: 'post',
-      mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(addClass)
     })
@@ -150,7 +149,6 @@ export const delClass = removeClass => {
   return function(dispatch) {
     fetch('/class/deleteClass  ', {
       method: 'delete',
-      mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(removeClass)
     })
@@ -166,7 +164,6 @@ export const delTeacher = removeTrainer => {
   return function(dispatch) {
     fetch('/trainer/deleteTrainer  ', {
       method: 'delete',
-      mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(removeTrainer)
     })
@@ -182,7 +179,6 @@ export const updateTeacher = update => {
   return function(dispatch) {
     fetch('/trainer/updateTrainer  ', {
       method: 'put',
-      mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(update)
     })
@@ -198,7 +194,6 @@ export const addStudentTo = addSt => {
   return function(dispatch) {
     fetch('/student/addStudent ', {
       method: 'post',
-      mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(addSt)
     })
@@ -214,7 +209,6 @@ export const delStudent = removeSt => {
   return function(dispatch) {
     fetch('/student/deleteStudent ', {
       method: 'delete',
-      mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(removeSt)
     })
