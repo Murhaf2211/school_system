@@ -29,12 +29,18 @@ const addStudent = async(req, res, next)=>{
 const deleteStudent = async(req, res, next)=>{
 
   try {
-    const findClassByClassCode = await classesModel.findOneAndUpdate({classCode: req.body.classCode, school: req.user.userName}, {$pull: {participants: req.body.student}}, {new: true});
+    const participantToBeRemoved = await studentModel.findOne({userName: req.body.student}).select('_id');
+    const findClassByClassCode = await classesModel.findOneAndUpdate({classCode: req.body.classCode, school: req.user.userName}, {$pull: {participants: participantToBeRemoved._id}}, {new: true});
     if (!findClassByClassCode) {
       return res.status(404).json({msg: 'The class you provided does not exist within your school'})
     }
-
-    return res.status(201).json({msg: `The student ${req.body.student} was removed from the class ${req.body.classCode}`});
+    await studentModel.findOneAndUpdate({userName: req.body.student}, {$unset: {class: 1}});
+    const populatedClass = await classesModel.findOne({classCode: req.body.classCode, school: req.user.userName})
+      .populate('participants', 'userName role -_id');
+    return res.status(201).json({
+      msg: `The student ${req.body.student} was removed from the class ${req.body.classCode}`,
+      actualClass: populatedClass
+    });
 
   }catch(error) {
     next(error);
