@@ -9,7 +9,10 @@ const initialState = {dataFromServer:[],
                       teacherEVarray:[],
                       studentComArray:[],
                       averageCourseEV:80,
-                      averageTeacherEV:50
+                      averageTeacherEV:50,
+                      classCode:'',
+                      trainer:'',
+                      student:''
                      };
 
 const reducer = (state = initialState, action) => {
@@ -141,5 +144,104 @@ export const fetchFrom = () => {
 export const changeAction = payload => {
   return { type: 'CHANGE', payload: payload }
 }
+
+export const newClass = addClass => {
+  return function(dispatch) {
+    fetch('/class/createClass ', {
+      method: 'post',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(addClass)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+export const delClass = removeClass => {
+  return function(dispatch) {
+    fetch('/class/deleteClass  ', {
+      method: 'delete',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(removeClass)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+export const delTeacher = removeTrainer => {
+  return function(dispatch) {
+    fetch('/trainer/deleteTrainer  ', {
+      method: 'delete',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(removeTrainer)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+export const updateTeacher = update => {
+  return function(dispatch) {
+    fetch('/trainer/updateTrainer  ', {
+      method: 'put',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(update)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+export const addStudentTo = addSt => {
+  return function(dispatch) {
+    fetch('/student/addStudent ', {
+      method: 'post',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(addSt)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+export const delStudent = removeSt => {
+  return function(dispatch) {
+    fetch('/student/deleteStudent ', {
+      method: 'delete',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(removeSt)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+
+
 
 export const store = createStore(reducer, applyMiddleware(thunk));
