@@ -22,11 +22,6 @@ export default class App extends Component {
 
         <Route path="/adminpage"  component={AdminPage}/>
         <Route path="/"  component={SlideImages}/>
-
-
-        <Route path="/"  component={Navbare}/>
-        <Route path="/"  component={SlideImages}/>
-    
         <Route path="/teacher" exact component={TeacherContainer} />
         <Route path="/student"  exact component={StudentContainer} />
 

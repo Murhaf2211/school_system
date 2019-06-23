@@ -28,7 +28,7 @@ export default class ModalBox extends Component{
        this.setState({submitClicked:true,allclasses:newArray,inputTeacher:'',inputClass:''});
        console.log(newArray);
        let wrapSection =document.querySelector('.add_class_section')
-    setTimeout( ()=> {    wrapSection.style.display="none" }, 700);
+    setTimeout( ()=> {    wrapSection.style.display="none" }, 1500);
 
 
      }
@@ -48,7 +48,7 @@ export default class ModalBox extends Component{
   render() {
     return(
          <>
-         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+HK|Special+Elite&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Mali&display=swap" rel="stylesheet"/>
             <section className="add_class_section">
               <form onSubmit={this.submitCreated.bind(this)}>
                 <span onClick={this.closeSection} className="close_add_class">X</span>
@@ -56,8 +56,8 @@ export default class ModalBox extends Component{
                 <input type="text" className="name_class_input " onChange={this.techerfunc.bind(this)} value={this.state.inputTeacher}/><br/><br/>
                 <label className="className_label">Name The Class</label><br/>
                 <input type="text" className="name_Teacher_input " onChange={this.classfun.bind(this)} value={this.state.inputClass}/><br/><br/><br/>
-                <button type="submit" className=" submit_addClass_button btn-secondary  btn-block"> Submit</button>
-                {this.state.submitClicked && <p>you created a new class</p>}
+                <button type="submit" className=" submit_addClass_button "> Submit</button>
+                {this.state.submitClicked && <p className="create_new_class ">you created a new class successfully</p>}
               </form>
 
         </section>

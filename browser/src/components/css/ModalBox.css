@@ -4,7 +4,7 @@ width: 900px;
 right: 500px;
 background: rgb(0,0,0,0.8);
 left:26vw;
-height: 500px;
+height: 550px;
 -webkit-animation-name: animatetop;
 -webkit-animation-duration: 0.4s;
 animation-name: animatetop;
@@ -15,10 +15,10 @@ text-align: center;
 }
 
 .close_add_class{
-	color:gray;
+	color:white;
 	position: absolute;
 	right: 3px;
-	font-size: 20px;
+	font-size: 30px;
 cursor: pointer;
 
 }
@@ -46,13 +46,17 @@ body{
 
 }
 .className_label{
+
 	color:slategray;
-	font-size: 1.7vw;
-	font-family: 'Special Elite', cursive;
-	font-family: 'Noto Sans HK', sans-serif;
+	font-size: 2vw;
+	font-family: 'Mali', cursive;;
 }
 .submit_addClass_button{
-	padding:1.5vw !important;
+width: 15vw;
+background:#610828;
+border-color:none;
+margin-bottom: 2vw;
+color:gray;
 
 }
 .add_pargraph{
@@ -60,19 +64,26 @@ body{
 	font-size: 5vw;
 }
 .paragraph{
-	font-size: 1.5vw;
-	color:red;
+	font-size: 2vw;
+	color:white;
 	cursor: pointer;
+	box-shadow: 1px 1px 1px 1px gray;
 	text-align: center;
-	opacity: 0.5;
-	background: darkgrey;
-	border-radius: 45vw;
+	background: rgba(0,0,0,0.6);
 	margin-bottom: 2vw;
 }
 .paragraph:hover{
 
 	transition: 0.4s;
 	opacity: 1;
+}
+.create_new_class{
+	font-size: 2vw;
+	word-spacing: 1vw;
+	color:green;
+	margin-top: 1vw;
+	width: 100%;
+	background: slategray;
 }
 .content_section{
 	height: auto;
