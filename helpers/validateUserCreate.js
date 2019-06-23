@@ -52,5 +52,8 @@ const validateClassDelete = [
     .escape()
 ]
 
+const validateUpdateTrainer = [...validateClassCreation];
+validateUpdateTrainer.pop();
 
-module.exports= { userCreateValidator, possibleRoles, validateClassCreation, validateClassDelete };
+
+module.exports= { userCreateValidator, possibleRoles, validateClassCreation, validateClassDelete, validateUpdateTrainer };

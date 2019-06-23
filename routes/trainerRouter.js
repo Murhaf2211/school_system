@@ -3,8 +3,10 @@ const trainerRouter = express.Router();
 const isAuth = require('../middleware/isAuth');
 const isAdmin = require('../middleware/isAdmin');
 const { deleteTrainer, updateTrainer } = require('../middleware/trainerMiddleware');
+const { validateClassDelete, validateUpdateTrainer } = require('../helpers/validateUserCreate');
+const { handeleValidationErrors } = require('../middleware/errorHandler');
 
-// trainerRouter.delete('/deleteTeacher',isAuth, isAdmin, isSchoolSameClass, deleteTrainer);
-// trainerRouter.put('/updateTeacher',isAuth, isAdmin, isSchoolSameTeacher, updateTrainer);
+trainerRouter.delete('/deleteTrainer', validateClassDelete, handeleValidationErrors, isAuth, isAdmin, deleteTrainer);
+trainerRouter.put('/updateTrainer', validateUpdateTrainer, handeleValidationErrors, isAuth, isAdmin, updateTrainer);
 
 module.exports = trainerRouter;

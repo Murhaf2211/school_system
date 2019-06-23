@@ -15,6 +15,7 @@ const studentRouter = require('./routes/studentRouter');
 
 const PORT= process.env.PORT || 4000;
 mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
 
 app.listen(PORT, async()=>{
     try{

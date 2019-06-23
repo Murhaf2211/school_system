@@ -6,7 +6,7 @@ const {userCreateValidator} = require('../helpers/validateUserCreate');
 const isAuth= require('../middleware/isAuth');
 
 usersRouter.post('/create', userCreateValidator, handeleValidationErrors, createUser);
-usersRouter.post('/login', userCreateValidator, loginUser);
+usersRouter.post('/login', userCreateValidator, handeleValidationErrors, loginUser);
 usersRouter.get('/logout', isAuth, logoutUser);
 
 module.exports= usersRouter;

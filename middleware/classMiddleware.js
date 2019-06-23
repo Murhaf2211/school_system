@@ -15,12 +15,12 @@ const createClass = async(req, res, next)=>{
 const deleteClass = async(req, res, next)=>{
 
   try {
-    const classToBeDeleted = await classesModel.findOneAndDelete({classCode: req.body.classCode, school: req.user.userName});
-    if (classToBeDeleted) {
-      return res.status(203).json({msg: `The course: ${req.body.classCode} from the ${req.user.userName} school was successfully deleted`});
+    const findClassByClassCode = await classesModel.findOneAndDelete({classCode: req.body.classCode, school: req.user.userName});
+    if (!findClassByClassCode) {
+      return res.status(404).json({msg: 'The class you provided does not exist within your school'});
     }
 
-    return res.status(404).json({msg: 'The class you provided does not exist within your school.'});
+    return res.status(203).json({msg: `The course: ${req.body.classCode} from the ${req.user.userName} school was successfully deleted`});
 
   } catch(error) {
       next(error);
