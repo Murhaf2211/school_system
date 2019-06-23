@@ -3,6 +3,9 @@ import thunk from 'redux-thunk';
 
 const initialState = {dataFromServer:[],
                       TeacherEvaluation:0,
+                      userNameValue:'',
+                      passwordValue:'',
+                      selectedOptionValue:'',
                       courseEvaluation:0,
                       studentComent:'',
                       courseEVarray:[],
@@ -10,7 +13,6 @@ const initialState = {dataFromServer:[],
                       studentComArray:[],
                       averageCourseEV:80,
                       averageTeacherEV:50,
-                      addClassClicked:false
                      };
 
 const reducer = (state = initialState, action) => {
@@ -49,12 +51,19 @@ const reducer = (state = initialState, action) => {
     case 'ERROR' :
       copyOfState.dataFromServer = action.payload.message;
       return copyOfState;
-    case 'CHANGE':
+
+
+    case 'loginCase':
      if (action.payload.target.getAttribute('type') === 'text') {
        copyOfState.userNameValue = action.payload.target.value;
      } else if (action.payload.target.getAttribute('type') === 'password') {
        copyOfState.passwordValue = action.payload.target.value;
+     } else  {
+       copyOfState.selectedOptionValue=action.payload.target.value
      }
+
+
+
      return copyOfState;
     default:
       return copyOfState;
@@ -96,7 +105,8 @@ const badRequest = error => {
 
 export const loginFetch = credentials => {
   return function(dispatch) {
-    fetch('/login', {
+    console.log(credentials);
+    fetch('/users/login', {
       method: 'post',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
@@ -140,7 +150,7 @@ export const fetchFrom = () => {
 }
 
 export const changeAction = payload => {
-  return { type: 'CHANGE', payload: payload }
+  return { type: 'loginCase', payload:payload }
 }
 
 export const store = createStore(reducer, applyMiddleware(thunk));
