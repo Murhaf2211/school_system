@@ -5,7 +5,11 @@ const initialState = {dataFromServer:[],
                       TeacherEvaluation:0,
                       userNameValue:'',
                       passwordValue:'',
-                      selectedOptionValue:'',
+                      selectOptionSignIn:'',
+                      userName_sign_up:'',
+
+                      password_sign_up:'',
+                      selectOption_sign_up:'',
                       courseEvaluation:0,
                       studentComent:'',
                       courseEVarray:[],
@@ -53,22 +57,35 @@ const reducer = (state = initialState, action) => {
       return copyOfState;
 
 
-    case 'loginCase':
+    case 'login':
      if (action.payload.target.getAttribute('type') === 'text') {
        copyOfState.userNameValue = action.payload.target.value;
      } else if (action.payload.target.getAttribute('type') === 'password') {
        copyOfState.passwordValue = action.payload.target.value;
      } else  {
-       copyOfState.selectedOptionValue=action.payload.target.value
+       copyOfState.selectOptionSignIn = action.payload.target.value
      }
 
+    return copyOfState;
+
+      case 'signUp':
+       if(action.payload.target.getAttribute('type')==='text') {
+         copyOfState.userName_sign_up=action.payload.target.value;
+       }  else if (action.payload.target.getAttribute('type')==='password') {
+         copyOfState.password_sign_up=action.payload.target.value;
+       }   else {
+         copyOfState.selectOption_sign_up=action.payload.target.value
+       }
+
+       return copyOfState;
 
 
-     return copyOfState;
     default:
       return copyOfState;
   }
 }
+
+
 
 export const updateCourseEV = ev => {
   return{type:'updateCOURS', event: ev}
@@ -103,14 +120,14 @@ const badRequest = error => {
  }
 }
 
-export const loginFetch = credentials => {
+export const loginFetch = credentials2 => {
   return function(dispatch) {
-    console.log(credentials);
+    console.log(credentials2);
     fetch('/users/login', {
       method: 'post',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(credentials)
+      body: JSON.stringify(credentials2)
     })
     .then(res => {
       if (res.status === 400 || res.status === 404) {
@@ -129,6 +146,37 @@ export const loginFetch = credentials => {
     })
   }
 }
+
+
+export const signUpFetch = credentials => {
+  return function(dispatch) {
+    console.log(credentials);
+    fetch('/users/create', {
+      method: 'post',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(credentials)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Error');
+      }
+
+      return res.json();
+    })
+    .then(userData => {
+      console.log(userData);
+
+    })
+    .catch(err => {
+      console.warn(err);
+
+    })
+  }
+}
+
+
+
 
 export const fetchFrom = () => {
   return function (dispatch){
@@ -149,8 +197,13 @@ export const fetchFrom = () => {
   }
 }
 
-export const changeAction = payload => {
-  return { type: 'loginCase', payload:payload }
+export const loginFunction = payload => {
+  return { type: 'login', payload:payload }
+}
+
+export const signUpfunction = payload => {
+
+  return {type:'signUp',payload:payload}
 }
 
 export const store = createStore(reducer, applyMiddleware(thunk));

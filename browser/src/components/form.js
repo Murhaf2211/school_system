@@ -1,17 +1,30 @@
 import React,{Component} from 'react';
 import './css/form.css';
 import {connect} from 'react-redux';
-import {changeAction,loginFetch} from '../redux/redux.js'
+import {loginFunction, signUpfunction,loginFetch,signUpFetch} from '../redux/redux.js'
 
  class Form extends Component{
 
   handleSubmit = (ev) =>{
     ev.preventDefault();
-    this.props.makeRequest({userName:this.props.userNameValue,
-                            password:this.props.passwordValue,
-                            selectedOption:this.props.selectedOptionValue }
-                              );
-  }
+                            this.props.makeRequest({userName:this.props.userNameValue,
+                                                    password:this.props.passwordValue,
+                                                    selectOptionSignIn:this.props.selectOptionSignIn});
+
+                            this.props.makeRequest1({
+                                                      userName_sign_up:this.props.userName_sign_up,
+                                                      password_sign_up:this.props.password_sign_up,
+                                                      selectOption_sign_up:this.props.selectOption_sign_up
+                                                        })
+
+
+
+
+               }
+
+
+
+
   render() {
     return(
       <>
@@ -32,7 +45,7 @@ import {changeAction,loginFetch} from '../redux/redux.js'
         					<input  onChange ={this.props.handleChange} value={this.props.passwordValue} id="pass" type="password" className="input" data-type="password"/>
         				</div>
 
-                <select   onChange={this.props.handleChange}  value={this.props.selectedOptionValue} > className="group">
+                <select   onChange={this.props.handleChange}  value={this.props.selectOptionSignIn} > className="group">
                   <option value="School">School</option>
                   <option value="Trainer">Trainer</option>
                   <option value="Student">Student</option>
@@ -54,30 +67,20 @@ import {changeAction,loginFetch} from '../redux/redux.js'
 			         <div className="sign-up-htm">
                 <div className="group">
         					<label htmlFor="user" className="label">userName</label>
-        					<input id="user" type="text" className="input"/>
+        					<input    onChange ={this.props.handleChange_sign_up} value={this.props.userName_sign_up} id="user" type="text" className="input"/>
         				</div>
         				<div className="group">
         					<label htmlFor="pass" className="label">Password</label>
-        					<input id="pass" type="password" className="input" data-type="password"/>
+        					<input   onChange ={this.props.handleChange_sign_up} value={this.props.password_sign_up}  id="pass" type="password" className="input" data-type="password"/>
         				</div>
-                <div className="group">
-        					<label htmlFor="pass" className="label">Email Address</label>
-        					<input id="pass" type="text" className="input"/>
-        				</div>
-
-
-                <select  className="group">
+            <select  onChange={this.props.handleChange_sign_up} value={this.props.selectOption_sign_up} className="group">
                   <option value="School">School</option>
                   <option value="Trainer">Trainer</option>
                   <option value="Student">Student</option>
 
                 </select>
 
-
-
-
-
-        				<div className="group">
+             	<div className="group">
         					<input type="submit" className="button" value="Sign Up"/>
         				</div>
         				<div className="hr"></div>
@@ -97,14 +100,19 @@ const mapStateToprops =state =>{
   return{
     userNameValue:state.userNameValue,
     passwordValue:state.passwordValue,
-    selectedOptionValue:state.selectedOptionValue
+    selectOptionSignIn:state.selectOptionSignIn,
+    userName_sign_up:state.userName_sign_up,
+    password_sign_up:state.password_sign_up,
+    selectOption_sign_up:state.selectOption_sign_up
   }
 }
 
 const mapDispatchToprops = dispatch =>{
    return {
-  handleChange:ev => dispatch(changeAction(ev)),
-  makeRequest:credentials => dispatch(loginFetch(credentials))
+  handleChange:ev => dispatch(loginFunction(ev)),
+  handleChange_sign_up:ev => dispatch(signUpfunction(ev)),
+  makeRequest:credentials => dispatch(loginFetch(credentials)),
+  makeRequest1:credentials2 => dispatch(signUpFetch(credentials2))
    }
 }
 
