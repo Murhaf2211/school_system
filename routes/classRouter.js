@@ -1,7 +1,7 @@
 const express = require('express');
 const classRouter = express.Router();
 const isAuth = require('../middleware/isAuth');
-const isAdmin = require('../middleware/isAdmin');
+const {isAdmin} = require('../middleware/isAdmin');
 const { createClass, deleteClass } = require('../middleware/classMiddleware');
 const { validateClassCreation, validateClassDelete } = require('../helpers/validateUserCreate');
 const { handeleValidationErrors } = require('../middleware/errorHandler');

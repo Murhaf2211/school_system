@@ -58,6 +58,8 @@ const loginUser = async(req, res, next)=>{
                                       .select('-_id -password');
       return res.status(200).json({msg: 'Welcome', schoolInfo: allSchoolPopulated});
     case 'Trainer':
+      // const trainersData = await classesModel.find({trainer: req.user.userName})
+      //                                 .populate({path: courses})
       return res.status(200).json({msg: 'Welcome', trainersInfo: 'Trainers info here'});
     case 'Student':
       return res.status(200).json({msg: 'Welcome', studentsInfo: 'Students info here'});

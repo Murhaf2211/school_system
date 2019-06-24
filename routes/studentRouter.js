@@ -1,7 +1,7 @@
 const express = require('express');
 const studentRouter = express.Router();
 const isAuth = require('../middleware/isAuth');
-const isAdmin = require('../middleware/isAdmin');
+const {isAdmin} = require('../middleware/isAdmin');
 const { addStudent, deleteStudent } = require('../middleware/studentMiddleware');
 const { validateStudentAddition } = require('../helpers/validateUserCreate')
 const { handeleValidationErrors } = require('../middleware/errorHandler');

@@ -68,6 +68,13 @@ const validateStudentAddition = [
   })
 ]
 
+const validatePostCreate = [
+  check('post').exists().not().isEmpty().withMessage('Fill all the fields in')
+    .trim()
+    .isLength({min: 1}).withMessage('It seems that you have written nothing')
+    .escape()
+]
+
 const validateUpdateTrainer = [...validateClassCreation];
 validateUpdateTrainer.pop();
 
@@ -77,5 +84,6 @@ module.exports= { userCreateValidator,
                   validateClassCreation,
                   validateClassDelete,
                   validateUpdateTrainer,
-                  validateStudentAddition
+                  validateStudentAddition,
+                  validatePostCreate
                 };

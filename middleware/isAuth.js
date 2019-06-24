@@ -9,7 +9,8 @@ const isAuth = async (req, res, next) => {
 
     next();
   }catch (error) {
-    error.message="You not login"
+    error.status = 401;
+    error.message = 'You are not authorized. Please login';
     next(error);
   }
 }

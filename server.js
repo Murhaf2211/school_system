@@ -11,6 +11,7 @@ const DB_URL = 'mongodb://localhost:27017/feedback';
 const classRouter = require('./routes/classRouter');
 const trainerRouter = require('./routes/trainerRouter');
 const studentRouter = require('./routes/studentRouter');
+const postsRouter = require('./routes/postsRouter');
 // const DB_URL = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0-wuxiw.mongodb.net/finalProject`;
 
 const PORT= process.env.PORT || 4000;
@@ -36,6 +37,7 @@ app.use('/users', usersRouter);
 app.use('/class', classRouter);
 app.use('/trainer', trainerRouter);
 app.use('/student', studentRouter);
+app.use('/posts', postsRouter);
 
 app.use(express.static('browser/build'));
 app.get('*', (req, res, next) => {
