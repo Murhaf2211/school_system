@@ -1,27 +1,27 @@
 import React,{Component} from 'react';
 import { Navbar, Nav, Form, FormControl,Button } from 'react-bootstrap';
-import atmo from '../img/atmo.png'
+import atmo3 from '../img/atmo3.png'
 
 
 export default class Navbare extends Component{
 
   render() {
     return(
-    <>
-     <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
-      <img src={atmo} className="navLogo"/>
-      <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#features">About US</Nav.Link>
-      <Nav.Link href="#pricing">Contact</Nav.Link>
-      </Nav>
-      <Form inline>
-       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-       <Button variant="outline-info">Search</Button>
-      </Form>
-     </Navbar>
-  </>
-
+      <>
+        <Navbar bg="dark" variant="dark" sticky="top">
+          <Navbar.Brand>
+            <img src={atmo3} className="d-inline-block align-top"
+            height= "60"
+            />
+          </Navbar.Brand>
+          <Nav className="mr-auto"></Nav>
+          <Navbar bg="dark" variant="dark">
+          <Form inline>
+            <Button variant="outline-danger" type="submit">Logout</Button>
+          </Form>
+            </Navbar>
+        </Navbar>
+        </>
       )
     }
   }

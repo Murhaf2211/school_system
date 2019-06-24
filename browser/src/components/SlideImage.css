@@ -8,9 +8,8 @@
 .slideshow:after {
     top: -16px;
     position: absolute;
-    height: 47vw;
-    width: 100vw;
-    top:70px;
+    height: 100%;
+    width: 100%;
 }
 .slideshow li span {
 		position: absolute;

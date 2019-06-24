@@ -2,8 +2,8 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 
 const initialState = {dataFromServer:[],
-                      TeacherEvaluation:0,
-                      courseEvaluation:0,
+                      TeacherEvaluation:50,
+                      courseEvaluation:50,
                       studentComent:'',
                       courseEVarray:[],
                       teacherEVarray:[],
