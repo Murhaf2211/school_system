@@ -1,9 +1,10 @@
 import React,{Component} from 'react';
 import './css/ClassInfo.css';
 import {studentsData} from './studentsData.js';
-import ChangeRemoveClass,{RemoveClass} from './changeName_removeClass.js';
-import ChangeTeacher from './changeTeacher';
-import AddStudent,{RemoveStudent} from './add_reomve_students';
+import {Removeclasscont} from './changeName_removeClass.js';
+import {TeacherContanier} from './changeTeacher.js';
+import {AddstudentCon} from './add_students';
+import {Removstudentcont} from './remove_students';
 
 
 
@@ -108,11 +109,11 @@ closeContanier =() =>{
 
 
   </section>
-  {this.state.showChangeBox && < ChangeRemoveClass/>}
-  {this.state.showRemoveBox && < RemoveClass/>}
-  {this.state.showChangeTacherBox && < ChangeTeacher/>}
-  {this.state.showAddStudentBox && < AddStudent/>}
-  {this.state.showRemoveStudent && < RemoveStudent/>}
+{ /**     {this.state.showChangeBox && < ChangeRemoveClass/>} **/}
+  {this.state.showRemoveBox && < Removeclasscont/>}
+  {this.state.showChangeTacherBox && < TeacherContanier/>}
+  {this.state.showAddStudentBox && < AddstudentCon/>}
+  {this.state.showRemoveStudent && < Removstudentcont/>}
 
 </>
     )

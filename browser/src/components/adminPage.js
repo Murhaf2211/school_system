@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './css/adminPage.css';
-import ModalBox from './ModalBox'
+import {ModalBoxContainer} from './ModalBox'
 
 
 
@@ -27,7 +27,7 @@ addClass(ev){
     <section className="classes_box">
        <button type="button" onClick={this.addClass.bind(this)}  className="add_class_button "  data-toggle="modal" data-target="#myModal">add new class</button>
 
-  {this.state.addClassClicked && <ModalBox/>}
+  {this.state.addClassClicked && <ModalBoxContainer/>}
 
 </section>
 </section>

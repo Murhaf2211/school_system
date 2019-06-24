@@ -8,16 +8,15 @@ import './App.css';
 import {LoginFormContainer} from './components/form';
 import SlideImages from './components/SlideImages';
 import AdminPage from  './components/adminPage';
+import ClassInfo from  './components/ClassInfo';
 
 
 export default class App extends Component {
 
-
-
   render() {
     return (
     <BrowserRouter>
-        <Route path="/adminpage"  component={AdminPage}/>
+        <Route path="/adminpage"  component={ClassInfo}/>
         <Route path="/"  component={SlideImages}/>
         <Route path="/" exact component={LoginFormContainer}/>
         <Route path="/teacher" exact component={TeacherContainer} />

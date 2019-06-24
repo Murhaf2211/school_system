@@ -7,14 +7,18 @@ const initialState = {dataFromServer:[],
                       passwordValue:'',
                       selectOptionSignIn:'',
                       userName_sign_up:'',
-
+                      NameOfNewClassValue:'',
+                      NameOfNewTeacherValue:'',
+                      changeTeacherVaule:'',
                       password_sign_up:'',
                       selectOption_sign_up:'',
+                      addstudentValue:'',
+                      classBelongStudentAdd:'',
+                      removestudentValue:'',
+                      classBelongStudentremove:'',
+                      deleteClassValue:'',
                       courseEvaluation:0,
                       studentComent:'',
-                      courseEVarray:[],
-                      teacherEVarray:[],
-                      studentComArray:[],
                       averageCourseEV:80,
                       averageTeacherEV:50,
                      };
@@ -79,8 +83,47 @@ const reducer = (state = initialState, action) => {
 
        return copyOfState;
 
+       case 'addClass' :
+       if (action.payload.target.getAttribute('identifier')==="first") {
+             copyOfState.NameOfNewClassValue=action.payload.target.value;
 
-    default:
+       } else {
+               copyOfState.NameOfNewTeacherValue=action.payload.target.value;
+       }
+
+         return copyOfState;
+
+
+         case 'UpdateTeacher' :
+         copyOfState.changeTeacherVaule= action.payload.target.value;
+
+         return copyOfState;
+
+         case 'addStudent' :
+         if(action.payload.target.getAttribute('identifier')==='student'){
+
+           copyOfState.addstudentValue=action.payload.target.value;
+         }  else {
+            copyOfState.classBelongStudentAdd=action.payload.target.value
+         }
+         return copyOfState;
+
+
+         case 'removestudent' :
+         if(action.payload.target.getAttribute('identifier')==='student2'){
+
+           copyOfState.removestudentValue=action.payload.target.value;
+         }  else {
+            copyOfState.classBelongStudentremove=action.payload.target.value
+         }
+         return copyOfState;
+
+         case 'deleteclass' :
+         copyOfState.deleteClassValue= action.payload.target.value;
+
+         return copyOfState;
+
+      default:
       return copyOfState;
   }
 }
@@ -106,6 +149,40 @@ export const updateAVteacherEV = ev => {
   return{type:'AVTCHER', event: ev}
 }
 
+export const loginFunction = payload => {
+  return { type: 'login', payload:payload }
+}
+
+export const signUpfunction = payload => {
+
+  return {type:'signUp',payload:payload}
+}
+
+export const addClassFunction =payload =>{
+
+  return {type:'addClass',payload:payload}
+}
+
+
+export const changeTeacherFunction = payload =>{
+
+  return {type:'UpdateTeacher',payload:payload}
+}
+
+export const addStudentFunction = payload =>{
+  return {type:'addStudent',payload:payload}
+}
+
+export const removeStudentFunction = payload =>{
+  return {type:'removestudent', payload:payload}
+}
+export const deleteClassFunction = payload =>{
+  return {type:'deleteclass', payload:payload}
+}
+
+
+
+
 const allData = data => {
   return{
     type: 'FETCHDATA',
@@ -119,6 +196,9 @@ const badRequest = error => {
    payload :error
  }
 }
+
+
+
 
 export const loginFetch = credentials2 => {
   return function(dispatch) {
@@ -177,6 +257,98 @@ export const signUpFetch = credentials => {
 
 
 
+export const newClass = addClass => {
+  return function(dispatch) {
+    console.log(addClass);
+    fetch('/class/createClass ', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(addClass)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+
+
+
+
+export const updateTeacher = update => {
+  return function(dispatch) {
+    console.log(update);
+    fetch('/trainer/updateTrainer  ', {
+      method: 'put',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(update)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+
+export const addStudentTo = addSt => {
+  return function(dispatch) {
+    console.log(addSt);
+    fetch('/student/addStudent ', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(addSt)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+
+
+export const delStudent = removeSt => {
+  return function(dispatch) {
+    console.log(removeSt);
+    fetch('/student/deleteStudent ', {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(removeSt)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+
+export const delClass = removeClass => {
+  return function(dispatch) {
+    console.log(removeClass);
+    fetch('/class/deleteClass  ', {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(removeClass)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+
+
+
+
 
 export const fetchFrom = () => {
   return function (dispatch){
@@ -197,13 +369,5 @@ export const fetchFrom = () => {
   }
 }
 
-export const loginFunction = payload => {
-  return { type: 'login', payload:payload }
-}
-
-export const signUpfunction = payload => {
-
-  return {type:'signUp',payload:payload}
-}
 
 export const store = createStore(reducer, applyMiddleware(thunk));

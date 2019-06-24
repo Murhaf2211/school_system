@@ -2,50 +2,14 @@ import React,{Component} from 'react';
 import './css/changeName_removeClass.css';
 import './css/ClassInfo.css';
 import './css/removeBox.css';
+import   {deleteClassFunction,delClass} from   '../redux/redux.js';
+import {connect} from 'react-redux';
 
 
 
-export default class ChangeRemoveClass extends Component {
 
 
-   closeSection= ()=> {
-     let wrapsection= document.querySelector('.add_class_section');
-     wrapsection.style.display='none';
-
-     let classInfoApperAgain =document.querySelector('.classifno_Cntainer');
-     classInfoApperAgain.style.filter="blur(0)";
-   }
-   classChangesubmitet =(ev) =>{
-     console.log('submitet');
-   }
-
-
-
-  render()    {
-
-  return(
-    <>
-    <section className="add_class_section">
-      <form  onSubmit={this.classChangesubmitet.bind(this)} >
-        <span onClick={this.closeSection} className="close_add_class">X</span>
-        <label className="className_label">put the old Name</label><br/>
-        <input  type="text" className="name_class_input "/><br/><br/>
-        <label className="className_label">put the new Name</label><br/>
-        <input type="text" className="name_Teacher_input " placeholder="new name" /><br/><br/><br/>
-        <button type="submit" className=" submit_addClass_button btn-secondary  btn-block"> Submit</button>
-
-      </form>
-    </section>
-
-    </>
-
-
-    )
-  }
-}
-
-
-export  class RemoveClass extends Component{
+ class RemoveClass extends Component{
   constructor(props){
     super(props);
     this.state={submitet:false}
@@ -57,23 +21,26 @@ export  class RemoveClass extends Component{
     classinfo.style.filter="blur(0)";
   }
 
-  classChangesubmitet = (ev) =>{
+  classRemoveSUbmited = (ev) =>{
+    ev.preventDefault()
     this.setState({submitet:true});
+    this.props.requestdeleteClass({
+    deleteclass:this.props.deleteClassValue
 
 
+    })
   }
-
 
   render() {
     return(
       <>
       <section className="removeBox">
-        <form  onSubmit={this.classChangesubmitet.bind(this)} >
+        <form  onSubmit={this.classRemoveSUbmited} >
           <span onClick={this.closeSection1} className="close_add_class1">X</span>
-          <label className="className_label1">wich class do you want to remove?</label><br/>
-          <input  type="text" className="name_class_input1 "/><br/><br/>
+          <label className="className_label1">Name of Class </label><br/>
+          <input  onChange={this.props.handleChange}  value={this.props.deleteClassValue}  type="text" className="name_class_input1 "/><br/><br/>
 
-          <button type="submit" className=" submit_addClass_button1 btn-block"> Confirm</button>
+          <button type="submit" className=" submit_addClass_button1 btn-block"> Delete</button>
 
         </form>
         {this.state.submitet && <p className="pargraph_confirm">you have changed the name</p>}
@@ -84,3 +51,20 @@ export  class RemoveClass extends Component{
 
 }
 }
+
+const mapStateToprops = state =>{
+  return{
+
+  deleteclass:state.deleteClassValue
+  }
+}
+
+const mapDispatchToprops = dispatch => {
+
+  return {
+    handleChange: ev => dispatch(deleteClassFunction(ev)),
+    requestdeleteClass: removeClass => dispatch(delClass(removeClass))
+  }
+}
+
+export  const Removeclasscont = connect(mapStateToprops,mapDispatchToprops)(RemoveClass)
