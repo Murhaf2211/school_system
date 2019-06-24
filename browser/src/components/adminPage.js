@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import './adminPage.css';
+import './css/adminPage.css';
 import ModalBox from './ModalBox'
 
 
@@ -14,6 +14,10 @@ export default class AdminPage extends Component{
 
 addClass(ev){
   this.setState({addClassClicked:true})
+}
+componentDidMount(){
+    this.setState({addClassClicked:false})
+  
 }
 
 

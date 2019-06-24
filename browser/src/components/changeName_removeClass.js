@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import './changeName_removeClass.css';
-import './ClassInfo.css';
-import './removeBox.css';
+import './css/changeName_removeClass.css';
+import './css/ClassInfo.css';
+import './css/removeBox.css';
 
 
 

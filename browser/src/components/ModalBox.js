@@ -1,14 +1,19 @@
 import React,{Component} from 'react';
 import ClassInfo from './ClassInfo.js'
 
-import './ModalBox.css';
+import './css/ModalBox.css';
 
 
 
 export default class ModalBox extends Component{
   constructor(props) {
     super(props);
-    this.state = {allclasses:[],inputTeacher:'',inputClass:'',submitClicked:false,pharagraphCliecd:false};
+    this.state = {allclasses:[],
+                  inputTeacher:'',
+                  inputClass:'',
+                  submitClicked:false,
+                  pharagraphCliecd:false,
+                   };
      }
      closeSection = ()=> {
        let wrapSection =document.querySelector('.add_class_section')
@@ -22,6 +27,8 @@ export default class ModalBox extends Component{
        newArray.push(emptyObject)
        this.setState({submitClicked:true,allclasses:newArray,inputTeacher:'',inputClass:''});
        console.log(newArray);
+       let wrapSection =document.querySelector('.add_class_section')
+    setTimeout( ()=> {    wrapSection.style.display="none" }, 700);
 
 
      }
@@ -45,12 +52,12 @@ export default class ModalBox extends Component{
             <section className="add_class_section">
               <form onSubmit={this.submitCreated.bind(this)}>
                 <span onClick={this.closeSection} className="close_add_class">X</span>
-                <label className="className_label">Name The Calss</label><br/>
+                <label className="className_label">Name the Teacher</label><br/>
                 <input type="text" className="name_class_input " onChange={this.techerfunc.bind(this)} value={this.state.inputTeacher}/><br/><br/>
-                <label className="className_label">Name The teacher</label><br/>
+                <label className="className_label">Name The Class</label><br/>
                 <input type="text" className="name_Teacher_input " onChange={this.classfun.bind(this)} value={this.state.inputClass}/><br/><br/><br/>
                 <button type="submit" className=" submit_addClass_button btn-secondary  btn-block"> Submit</button>
-
+                {this.state.submitClicked && <p>you created a new class</p>}
               </form>
 
         </section>

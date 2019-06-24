@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import './add_remove_students.css';
+import './css/add_remove_students.css';
 
 
 export default class AddStudent extends Component{
