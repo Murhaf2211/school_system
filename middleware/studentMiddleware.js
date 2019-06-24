@@ -5,8 +5,13 @@ const schoolModel = require('../models/schoolModel');
 const addStudent = async(req, res, next)=>{
 
   try {
-    const findParticipantToAdded = await studentModel.findOne({userName: req.body.student}).select('_id');
-    const findSchool = await schoolModel.findOne({userName: req.user.userName}).select('_id');
+
+    const findSchool = await schoolModel.findOne({userName: req.user.userName});
+    const findParticipantToAdded = await studentModel.findOne({userName: req.body.student});
+    const findClassByParticipantsId = await classesModel.findOne({school: findSchool._id});
+    if (findClassByParticipantsId) {
+      return res.status(400).json({msg: 'The participant already belongs to another class. Please unregister him first.'})
+    }
     const findClassByClassCode = await classesModel.findOneAndUpdate({
       classCode: req.body.classCode,
       school: findSchool._id

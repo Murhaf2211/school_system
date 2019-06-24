@@ -9,7 +9,8 @@ const createPost = async (req, res, next) => {
     await postsModel.create(req.body);
     const freshPostFound = await postsModel.findOne({post: req.body.post, author: findAuthor._id});
     await studentModel.findOneAndUpdate({userName: req.user.userName}, {$push: {posts: freshPostFound._id}}, {new: true});
-    console.log(findAuthor.class);
+    console.log(req.body.courseEvaluation);
+    console.log(req.body.trainerEvaluation);
     const classStudentBelongsTo = await classesModel.findOneAndUpdate(
       {_id: findAuthor.class},
       {$push: {courseEvaluation: parseInt(req.body.courseEvaluation), trainerEvaluation: parseInt(req.body.trainerEvaluation)}
