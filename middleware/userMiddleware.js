@@ -46,7 +46,22 @@ const loginUser = async(req, res, next)=>{
   const initialToken = await jwt.sign({userName: findByUserName.userName, role: findByUserName.role}, process.env.SECRET);
   const token = 'Bearer ' + initialToken;
   res.cookie('authToken', token, {httpOnly: true});
-  return res.status(200).json({msg:`${findByUserName.userName},congratulation you got cookie`});
+
+  switch(req.body.role) {
+    case 'School':
+      const allSchoolPopulated = await schoolModel
+                                      .findOne({userName: req.body.userName})
+                                      .populate({path: 'courses',
+                                                select: '-_id -password -school',
+                                                populate: {path: 'participants', select: '-_id -password'}
+                                              })
+                                      .select('-_id -password');
+      return res.status(200).json({msg: 'Welcome', schoolInfo: allSchoolPopulated});
+    case 'Trainer':
+      return res.status(200).json({msg: 'Welcome', trainersInfo: 'Trainers info here'});
+    case 'Student':
+      return res.status(200).json({msg: 'Welcome', studentsInfo: 'Students info here'});
+  }
 
   }catch (error) {
     next(error);
@@ -57,7 +72,7 @@ const logoutUser = async (req, res, next) => {
   try {
     res.clearCookie('authToken');
 
-    return res.status(200).json({msg: 'User is logged out'});
+    return res.status(200).json({msg: 'You are logged out succesfully!'});
   }catch (error) {
     next(error);
   }

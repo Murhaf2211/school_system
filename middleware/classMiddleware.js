@@ -15,7 +15,7 @@ const createClass = async(req, res, next)=>{
     const populatedSchool = await schoolModel
                                     .findOne({userName: req.user.userName})
                                     .populate({path: 'courses',
-                                              select: '-_id -password',
+                                              select: '-_id -password -school',
                                               populate: {path: 'participants', select: '-_id -password'}
                                             })
                                     .select('-_id -password')
@@ -36,7 +36,13 @@ const deleteClass = async(req, res, next)=>{
     }
 
     const findRelevantSchool = await schoolModel.findOneAndUpdate({userName: req.user.userName}, {$pull: {courses: findClassByClassCode._id}}, {new: true});
-    const updatedPopulatedSchool = await schoolModel.findOne({userName: req.user.userName}).populate('courses', '-_id -school ').select('-_id -password');
+    const updatedPopulatedSchool = await schoolModel
+                                    .findOne({userName: req.user.userName})
+                                    .populate({path: 'courses',
+                                              select: '-_id -password -school',
+                                              populate: {path: 'participants', select: '-_id -password'}
+                                            })
+                                    .select('-_id -password')
     return res.status(200).json({msg: 'Success', schoolInfo: updatedPopulatedSchool});
 
   } catch(error) {
