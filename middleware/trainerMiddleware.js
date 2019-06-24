@@ -14,7 +14,10 @@ const deleteTrainer = async(req, res, next)=>{
                                     .findOne({userName: req.user.userName})
                                     .populate({path: 'courses',
                                               select: '-_id -password -school',
-                                              populate: {path: 'participants', select: '-_id -password'}
+                                              populate: {path: 'participants',
+                                                        select: '-_id -password -class',
+                                                        populate: {path: 'posts', select: '-_id post'}
+                                                    }
                                             })
                                     .select('-_id -password')
 
@@ -39,7 +42,10 @@ const updateTrainer = async(req, res, next)=>{
                                     .findOne({userName: req.user.userName})
                                     .populate({path: 'courses',
                                               select: '-_id -password -school',
-                                              populate: {path: 'participants', select: '-_id -password'}
+                                              populate: {path: 'participants',
+                                                        select: '-_id -password -class',
+                                                        populate: {path: 'posts', select: '-_id post'}
+                                                    }
                                             })
                                     .select('-_id -password')
 

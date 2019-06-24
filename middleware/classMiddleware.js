@@ -16,7 +16,10 @@ const createClass = async(req, res, next)=>{
                                     .findOne({userName: req.user.userName})
                                     .populate({path: 'courses',
                                               select: '-_id -password -school',
-                                              populate: {path: 'participants', select: '-_id -password'}
+                                              populate: {path: 'participants',
+                                                        select: '-_id -password -class',
+                                                        populate: {path: 'posts', select: '-_id post'}
+                                                    }
                                             })
                                     .select('-_id -password')
     return res.status(203).json({msg: 'Success', schoolInfo: populatedSchool});
@@ -31,6 +34,7 @@ const deleteClass = async(req, res, next)=>{
   try {
     const schoolsId = await schoolModel.findOne({userName: req.user.userName}).select('_id');
     const findClassByClassCode = await classesModel.findOneAndDelete({classCode: req.body.classCode, school: schoolsId._id}).select('_id');
+
     if (!findClassByClassCode) {
       return res.status(404).json({msg: 'The class you provided does not exist within your school'});
     }
@@ -40,7 +44,10 @@ const deleteClass = async(req, res, next)=>{
                                     .findOne({userName: req.user.userName})
                                     .populate({path: 'courses',
                                               select: '-_id -password -school',
-                                              populate: {path: 'participants', select: '-_id -password'}
+                                              populate: {path: 'participants',
+                                                        select: '-_id -password -class',
+                                                        populate: {path: 'posts', select: '-_id post'}
+                                                    }
                                             })
                                     .select('-_id -password')
     return res.status(200).json({msg: 'Success', schoolInfo: updatedPopulatedSchool});

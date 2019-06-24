@@ -53,7 +53,10 @@ const loginUser = async(req, res, next)=>{
                                       .findOne({userName: req.body.userName})
                                       .populate({path: 'courses',
                                                 select: '-_id -password -school',
-                                                populate: {path: 'participants', select: '-_id -password'}
+                                                populate: {path: 'participants',
+                                                          select: '-_id -password -class',
+                                                          populate: {path: 'posts', select: '-_id post'}
+                                                        }
                                               })
                                       .select('-_id -password');
       return res.status(200).json({msg: 'Welcome', schoolInfo: allSchoolPopulated});
