@@ -16,11 +16,15 @@ export default class App extends Component {
   render() {
     return (
     <BrowserRouter>
-        <Route path="/adminpage"  component={ClassInfo}/>
+       <Route path="/"  component={Navbare}/>
+        <Route path="/adminpage"  component={AdminPage}/>
+        <Route path="/adminpage/classinfo"  component={ClassInfo}/>
         <Route path="/"  component={SlideImages}/>
+
         <Route path="/" exact component={LoginFormContainer}/>
         <Route path="/teacher" exact component={TeacherContainer} />
         <Route path="/student"  exact component={StudentContainer} />
+
     </BrowserRouter>
         )
   }

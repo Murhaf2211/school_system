@@ -6,7 +6,8 @@ export default  class SlideImages extends Component{
   render() {
 
       return(
-        <section className="image_contanier">
+
+    <section className="image_contanier">
       <ul className="slideshow">
 	<li><span></span></li>
   <li><span></span></li>
