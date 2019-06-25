@@ -47,7 +47,7 @@ import {loginFunction, signUpfunction,loginFetch,signUpFetch} from '../redux/red
 
                 <select className="select "  onChange={this.props.handleChange}  value={this.props.selectOptionSignIn}>
                    <option >choose your role</option>
-                  <option   value="School">School</option>
+                   <option   value="School">School</option>
 
                   <option  value="Trainer">Trainer</option>
                   <option     value="Student">Student</option>
