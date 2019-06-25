@@ -2,14 +2,17 @@
 
 height: 47vw;
 width: 70vw;
-margin-left: 0;
+
 background: rgb(1,1,1,0.4);
 display: flex;
 flex-direction: row;
-margin-left: 30vw;
+margin-left: 29vw;
 justify-content: space-around;
 z-index: -1;
 flex-direction:row-reverse;
+margin-top: -40vw;
+
+
 
 }
 .classifno_Cntainer h4{
@@ -108,8 +111,8 @@ border-color: none;
   color:white;
   font-size: 2.5vw;
   position: absolute;
-  right: 0.5vw;
-  top:5.5vw;
+  right:1vw;
+  top:5vw;
   cursor: pointer;
 }
 .Titel_students{

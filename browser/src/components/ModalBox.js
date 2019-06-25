@@ -1,36 +1,43 @@
 import React,{Component} from 'react';
 import ClassInfo from './ClassInfo.js'
 import './css/ModalBox.css';
+import   {addClassFunction,newClass} from '../redux/redux.js';
+import {connect} from 'react-redux';
 
 
 
-export default class ModalBox extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {allclasses:[],
-                  inputTeacher:'',
-                  inputClass:'',
-                  submitClicked:false,
-                  pharagraphCliecd:false,
-                   };
-     }
+ class ModalBox extends Component{
 
-     submitCreated(ev) {
-       ev.preventDefault();
-       let emptyObject ={NameOfClass:this.state.inputClass,TeachersName:this.state.inputTeacher}
-       let newArray =[...this.state.allclasses]
-       newArray.push(emptyObject)
-       this.setState({submitClicked:true,allclasses:newArray,inputTeacher:'',inputClass:''});
-       console.log(newArray);
+     closeSection = ()=> {
        let wrapSection =document.querySelector('.add_class_section')
-       setTimeout( ()=> {    wrapSection.style.display="none" }, 700);
+       wrapSection.style.display="none";
      }
+
+     submitCreated= (ev) =>{
+       ev.preventDefault();
+      this.props.makeRequestForNewClass({
+         NameOfNewClass:this.props.NameOfNewClassValue,
+         NameOfNewTeacher:this.props.NameOfNewTeacherValue
+
+       })
+
+
+
+
+
 
 
   closeSection = ()=> {
     let wrapSection =document.querySelector('.add_class_section')
     wrapSection.style.display="none";
      }
+
+
+
+
+   classIsClicked(ev){
+     console.log('hallo');
+     this.setState({pharagraphCliecd:true})
 
   techerfunc(ev){
     this.setState({inputTeacher:ev.target.value})
@@ -40,6 +47,7 @@ export default class ModalBox extends Component{
     this.setState({inputClass:ev.target.value})
    }
 
+
   classIsClicked(ev){
     console.log('hallo');
     this.setState({pharagraphCliecd:true})
@@ -47,27 +55,60 @@ export default class ModalBox extends Component{
 
   render() {
     return(
+
       <>
          <link href="https://fonts.googleapis.com/css?family=Noto+Sans+HK|Special+Elite&display=swap" rel="stylesheet"/>
+
             <section className="add_class_section">
-              <form onSubmit={this.submitCreated.bind(this)}>
+               <form onSubmit={this.submitCreated}>
+
                 <span onClick={this.closeSection} className="close_add_class">X</span>
-                <label className="className_label">Name the Teacher</label><br/>
-                <input type="text" className="name_class_input " onChange={this.techerfunc.bind(this)} value={this.state.inputTeacher}/><br/><br/>
-                <label className="className_label">Name The Class</label><br/>
-                <input type="text" className="name_Teacher_input " onChange={this.classfun.bind(this)} value={this.state.inputClass}/><br/><br/><br/>
-                <button type="submit" className=" submit_addClass_button btn-secondary  btn-block"> Submit</button>
-                {this.state.submitClicked && <p>you created a new class</p>}
+
+                <label className="className_label">Name of class</label><br/>
+                <input type="text" identifier="first" className="name_class_input " onChange={this.props.handleChange} value={this.props.NameOfNewClassValue}/><br/><br/>
+                <label className="className_label">Name of Teacher</label><br/>
+                <input type="text" identifier="second" className="name_Teacher_input " onChange={this.props.handleChange} value={this.props.NameOfNewTeacherValue}/><br/><br/><br/>
+                <button type="submit" className=" submit_addClass_button "> Submit</button>
+
               </form>
-             </section>
-           <section className="content_section">
+
+
+        </section>
+    {/*      <section className="content_section">
              {this.state.allclasses.map((item,index)=>{
-               return(
-                  <p key={index} className="paragraph" onClick={this.classIsClicked.bind(this)} >{item.NameOfClass}</p>)
-              })}
-           </section>
-            {this.state.pharagraphCliecd && <ClassInfo/>}
-      </>
+              return(
+                    <p  key={index} className="paragraph" onClick={this.classIsClicked.bind(this)} >{item.NameOfClass}</p>
+                       )
+})} */}
+
+
+
+         </>
+
     )
+}
+}
+
+
+
+
+const mapStateToprops = state =>{
+  return{
+    NameOfNewClassValue:state.NameOfNewClassValue,
+    NameOfNewTeacherValue:state.NameOfNewTeacherValue
+
   }
 }
+
+const mapDispatchToprops =dispatch =>{
+  return{
+    handleChange:ev => dispatch(addClassFunction(ev)),
+    makeRequestForNewClass:addClass => dispatch(newClass(addClass))
+
+      </>
+    )
+
+  }
+}
+
+export const  ModalBoxContainer = connect(mapStateToprops,mapDispatchToprops)(ModalBox);

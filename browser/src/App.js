@@ -11,12 +11,17 @@ import {LoginFormContainer} from './components/form.js';
 import SlideImages from './components/SlideImages';
 import ClassInfo from './components/ClassInfo';
 import AdminPage from  './components/adminPage';
+import ClassInfo from  './components/ClassInfo';
 
 
 export default class App extends Component {
 
   render() {
     return (
+
+
+    </BrowserRouter>
+
       <BrowserRouter>
         <Route path="/"  component={SlideImages}/>
         <Route path="/"  component={Navbare}/>
@@ -26,6 +31,7 @@ export default class App extends Component {
         <Route path="/adminpage"  exact component={AdminPage} />
         <Route path="/"  component={Footer}/>
       </BrowserRouter>
+
         )
   }
 }
