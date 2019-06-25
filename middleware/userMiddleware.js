@@ -68,11 +68,34 @@ const loginUser = async(req, res, next)=>{
 
       return res.status(200).json({msg: 'Welcome', schoolInfo: allSchoolPopulated});
     case 'Trainer':
-      // const trainersData = await classesModel.find({trainer: req.user.userName})
-      //                                 .populate({path: courses})
-      return res.status(200).json({msg: 'Welcome', trainersInfo: 'Trainers info here'});
+    const allClassesPopulated = await classesModel
+                                    .find({trainer: req.body.userName})
+                                    .populate({path: 'participants',
+                                                  select: '-_id -password -class',
+                                                  populate: {path: 'posts', select: '-_id post'
+                                                }
+                                            })
+                                    .select('-_id -password');
+    console.log(allClassesPopulated);
+
+    allClassesPopulated.forEach(course => {
+      course.courseEvaluationAvg = (course.courseEvaluation.reduce((a, b) => a + b, 0)) / course.courseEvaluation.length || 0;
+      course.trainerEvaluationAvg = (course.trainerEvaluation.reduce((a, b) => a + b, 0)) / course.trainerEvaluation.length || 0;
+    })
+      return res.status(200).json({msg: 'Welcome', trainersInfo: allClassesPopulated});
     case 'Student':
-      return res.status(200).json({msg: 'Welcome', studentsInfo: 'Students info here'});
+      const studentInfo = await studentModel.findOne({userName: req.body.userName})
+                                                        .populate({path: 'class',
+                                                                  select: '-_id trainer classCode participants',
+                                                                  populate: {path: 'participants',
+                                                                            select: '-_id userName posts',
+                                                                            populate: {path: 'posts',
+                                                                                      select: '-_id post'
+                                                                                    }
+                                                                                  }
+                                                                              })
+                                                        .select('-_id -password -posts');
+      return res.status(200).json({msg: 'Welcome', studentsInfo: studentInfo});
   }
 
   }catch (error) {
