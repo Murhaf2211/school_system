@@ -51,7 +51,8 @@ const loginUser = async(req, res, next)=>{
     case 'School':
       const allSchoolPopulated = await schoolModel
                                       .findOne({userName: req.body.userName})
-                                      .populate({path: 'courses',
+                                      .populate(
+                                                {path: 'courses',
                                                 select: '-_id -password -school',
                                                 populate: {path: 'participants',
                                                           select: '-_id -password -class',
@@ -59,6 +60,12 @@ const loginUser = async(req, res, next)=>{
                                                         }
                                               })
                                       .select('-_id -password');
+
+      allSchoolPopulated.courses.forEach(course => {
+        course.courseEvaluationAvg = (course.courseEvaluation.reduce((a, b) => a + b, 0)) / course.courseEvaluation.length || 0;
+        course.trainerEvaluationAvg = (course.trainerEvaluation.reduce((a, b) => a + b, 0)) / course.trainerEvaluation.length || 0;
+      })
+
       return res.status(200).json({msg: 'Welcome', schoolInfo: allSchoolPopulated});
     case 'Trainer':
       // const trainersData = await classesModel.find({trainer: req.user.userName})
