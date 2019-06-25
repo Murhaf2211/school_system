@@ -1,3 +1,7 @@
+body{
+  margin: 0;
+  background: black;
+}
 .footerStyle{
   position: absolute;
   bottom: 0;
