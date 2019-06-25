@@ -43,7 +43,7 @@ import {connect} from 'react-redux';
           <button type="submit" className=" submit_addClass_button1 btn-block"> Delete</button>
 
         </form>
-        {this.state.submitet && <p className="pargraph_confirm">you have changed the name</p>}
+        {this.state.submitet && <p className="pargraph_confirm">you deletet the class</p>}
       </section>
 
       </>

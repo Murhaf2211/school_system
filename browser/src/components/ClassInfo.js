@@ -3,6 +3,7 @@ import './css/ClassInfo.css';
 import {studentsData} from './studentsData.js';
 import {Removeclasscont} from './changeName_removeClass.js';
 import {TeacherContanier} from './changeTeacher.js';
+import {DeletteacherCont} from './deleteTeacher.js';
 import {AddstudentCon} from './add_students';
 import {Removstudentcont} from './remove_students';
 
@@ -16,7 +17,8 @@ export default class ClassInfo extends Component{
                 showRemoveBox:false,
                 showChangeTacherBox:false,
                 showAddStudentBox:false,
-                showRemoveStudent:false }
+                showRemoveStudent:false,
+                showdeletteacherbox:false}
   }
 
 
@@ -42,6 +44,13 @@ closeContanier =() =>{
     this.setState({showChangeTacherBox:true})
     const classinfo =document.querySelector(".classifno_Cntainer");
     classinfo.style.filter="blur(8px)";
+
+
+  }
+
+  deleteTeacherclicked = () => {
+
+   this.setState({showdeletteacherbox:true})
 
 
   }
@@ -88,7 +97,7 @@ closeContanier =() =>{
   <div className="every_info_about_class">
       <h4>Class:FB1</h4>
       <div className="teacher_rating"> here is the rating</div>
-      <div className="div_for_buttons">   <button onClick={this.addChangeBox}>change the name</button>
+      <div className="div_for_buttons">
       <button onClick={this.removeClass.bind(this)}>remove class</button></div>
     </div>
 
@@ -96,7 +105,13 @@ closeContanier =() =>{
     <h4>Teacher:Kostas</h4>
 
       <div className="teacher_rating"> here is the rating</div>
-    <div className="div_for_buttons">  <button onClick={this.changeTeacherClicked.bind(this)}>change Teacher</button></div>
+    <div className="div_for_buttons">
+      <button onClick={this.changeTeacherClicked.bind(this)}>change Teacher</button>
+      <button onClick={this.deleteTeacherclicked.bind(this)}>delete Teacher</button>
+
+
+
+    </div>
   </div>
 
   <div className="every_info_about_class"><h4>Number of students:15 </h4><div className="div_for_buttons">
@@ -114,6 +129,7 @@ closeContanier =() =>{
   {this.state.showChangeTacherBox && < TeacherContanier/>}
   {this.state.showAddStudentBox && < AddstudentCon/>}
   {this.state.showRemoveStudent && < Removstudentcont/>}
+  {this.state.showdeletteacherbox && < DeletteacherCont/>}
 
 </>
     )

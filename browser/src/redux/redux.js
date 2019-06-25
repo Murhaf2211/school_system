@@ -10,6 +10,9 @@ const initialState = {dataFromServer:[],
                       NameOfNewClassValue:'',
                       NameOfNewTeacherValue:'',
                       changeTeacherVaule:'',
+                      classChangeTeacher:'',
+                      deleteTeacherValue:'',
+                      classdeleteTeacher:'',
                       password_sign_up:'',
                       selectOption_sign_up:'',
                       addstudentValue:'',
@@ -93,9 +96,30 @@ const reducer = (state = initialState, action) => {
 
          return copyOfState;
 
+         case 'deleteclass' :
+         copyOfState.deleteClassValue= action.payload.target.value;
+
+         return copyOfState;
+
+
 
          case 'UpdateTeacher' :
-         copyOfState.changeTeacherVaule= action.payload.target.value;
+         if(action.payload.target.getAttribute('identifier')==='nameteacher') {
+              copyOfState.changeTeacherVaule= action.payload.target.value;
+         } else {
+               copyOfState.classChangeTeacher= action.payload.target.value;
+         }
+
+          return copyOfState;
+
+         case 'deleteTeacher' :
+         if(action.payload.target.getAttribute('identifier')==='nameteacher') {
+              copyOfState.deleteTeacherValue= action.payload.target.value;
+         } else {
+               copyOfState.classdeleteTeacher= action.payload.target.value;
+         }
+
+
 
          return copyOfState;
 
@@ -118,10 +142,6 @@ const reducer = (state = initialState, action) => {
          }
          return copyOfState;
 
-         case 'deleteclass' :
-         copyOfState.deleteClassValue= action.payload.target.value;
-
-         return copyOfState;
 
       default:
       return copyOfState;
@@ -167,6 +187,11 @@ export const addClassFunction =payload =>{
 export const changeTeacherFunction = payload =>{
 
   return {type:'UpdateTeacher',payload:payload}
+}
+
+export const deleteTeacherFunction = payload =>{
+
+  return {type:'deleteTeacher',payload:payload}
 }
 
 export const addStudentFunction = payload =>{
@@ -284,6 +309,25 @@ export const updateTeacher = update => {
       method: 'put',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(update)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+
+
+export const delTeacher = removeTrainer => {
+  return function(dispatch) {
+    console.log(removeTrainer);
+    fetch('/trainer/deleteTrainer  ', {
+
+        method: 'delete',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(removeTrainer)
     })
     .then(res => {
       if (res.status === 400 || res.status === 404) {
