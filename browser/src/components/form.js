@@ -37,18 +37,20 @@ import {loginFunction, signUpfunction,loginFetch,signUpFetch} from '../redux/red
 
         			<div className="sign-in-htm">
         				<div className="group">
-        					<label htmlFor="user" className="label">UserName</label>
-        					<input  onChange ={this.props.handleChange} value={this.props.userNameValue} id="user" type="text" className="input"/>
+
+                <input  onChange ={this.props.handleChange} value={this.props.userNameValue} id="user" type="text" className="input" placeHolder="UserName"/>
         				</div>
         				<div className="group">
-        					<label htmlFor="pass" className="label">Password</label>
-        					<input  onChange ={this.props.handleChange} value={this.props.passwordValue} id="pass" type="password" className="input" data-type="password"/>
+
+        					<input  onChange ={this.props.handleChange} value={this.props.passwordValue} id="pass" type="password" className="input" data-type="password" placeHolder="password"/>
         				</div>
 
-                <select   onChange={this.props.handleChange}  value={this.props.selectOptionSignIn} > className="group">
-                  <option value="School">School</option>
-                  <option value="Trainer">Trainer</option>
-                  <option value="Student">Student</option>
+                <select className="select "  onChange={this.props.handleChange}  value={this.props.selectOptionSignIn}>
+                   <option >choose your role</option>
+                  <option   value="School">School</option>
+
+                  <option  value="Trainer">Trainer</option>
+                  <option     value="Student">Student</option>
 
                 </select>
 
