@@ -8,8 +8,6 @@ export default class AdminPage extends Component{
   constructor(props) {
     super(props);
     this.state = {addClassClicked: false};
-
-
   }
 
 addClass(ev){
@@ -18,10 +16,10 @@ addClass(ev){
 
 
 
-
   render() {
     return(
     <>
+
     <section className="contanier">
 
     <section className="classes_box">
@@ -33,6 +31,7 @@ addClass(ev){
 </section>
 
   </>
+
 
 
     )

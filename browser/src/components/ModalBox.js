@@ -25,6 +25,11 @@ import {connect} from 'react-redux';
 
 
 
+
+
+  closeSection = ()=> {
+    let wrapSection =document.querySelector('.add_class_section')
+    wrapSection.style.display="none";
      }
 
 
@@ -34,12 +39,26 @@ import {connect} from 'react-redux';
      console.log('hallo');
      this.setState({pharagraphCliecd:true})
 
+  techerfunc(ev){
+    this.setState({inputTeacher:ev.target.value})
+   }
+
+  classfun(ev){
+    this.setState({inputClass:ev.target.value})
+   }
+
+
+  classIsClicked(ev){
+    console.log('hallo');
+    this.setState({pharagraphCliecd:true})
    }
 
   render() {
     return(
-         <>
-        <link href="https://fonts.googleapis.com/css?family=Mali&display=swap" rel="stylesheet"/>
+
+      <>
+         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+HK|Special+Elite&display=swap" rel="stylesheet"/>
+
             <section className="add_class_section">
                <form onSubmit={this.submitCreated}>
 
@@ -52,6 +71,7 @@ import {connect} from 'react-redux';
                 <button type="submit" className=" submit_addClass_button "> Submit</button>
 
               </form>
+
 
         </section>
     {/*      <section className="content_section">
@@ -84,6 +104,10 @@ const mapDispatchToprops =dispatch =>{
   return{
     handleChange:ev => dispatch(addClassFunction(ev)),
     makeRequestForNewClass:addClass => dispatch(newClass(addClass))
+
+      </>
+    )
+
   }
 }
 

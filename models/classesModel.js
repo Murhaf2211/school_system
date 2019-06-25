@@ -1,11 +1,14 @@
 const mongoose= require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    classCode: {type: String, required:true},
-    //teachers: {type: [String]},
-    //participants: {type: [String]},
-    school: {type: String}
-    
+    classCode: {type: String, required: true},
+    school: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'schools'},
+    trainer: {type: String, default: ''},
+    participants: [{type: mongoose.Schema.Types.ObjectId, ref: 'students'}],
+    courseEvaluation: [Number],
+    trainerEvaluation: [Number],
+    courseEvaluationAvg: Number,
+    trainerEvaluationAvg: Number
 },{versionKey:false});
 
 const classesModel= mongoose.model('classes', userSchema);

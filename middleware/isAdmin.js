@@ -1,17 +1,21 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
+const notAuthorizedMsg = 'You are not authorized';
 
 const isAdmin = async (req, res, next) => {
     try {
-     const decodedUser = await jwt.decode(req.token, process.env.SECRET);
-  
-     if(decodedUser.role=='admin') next();
-  
-      else res.status(201).json('You are not admin');
-  
+     req.user.role === 'School' ? next() : res.status(401).json({msg: notAuthorizedMsg});
     }catch(error) {
       next(error);
     }
   }
 
-module.exports = isAdmin;
+const isStudent = async (req, res, next) => {
+  try {
+    req.user.role === 'Student' ? next() : res.status(401).json({msg: notAuthorizedMsg})
+  }catch(error) {
+    next(error);
+  }
+}
+
+module.exports = {isAdmin, isStudent};

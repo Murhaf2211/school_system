@@ -7,6 +7,7 @@ export default  class SlideImages extends Component{
 
       return(
 
+
     <section className="image_contanier">
       <ul className="slideshow">
 	<li><span></span></li>
@@ -17,7 +18,7 @@ export default  class SlideImages extends Component{
 </ul>
 </section>
 
+
     )
   }
-
 }
