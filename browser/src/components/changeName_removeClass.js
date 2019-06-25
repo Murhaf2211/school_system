@@ -55,7 +55,7 @@ import {connect} from 'react-redux';
 const mapStateToprops = state =>{
   return{
 
-  deleteclass:state.deleteClassValue
+  deleteClassValue:state.deleteClassValue
   }
 }
 
