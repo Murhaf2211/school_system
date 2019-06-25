@@ -17,9 +17,9 @@ onChange = date => this.setState({ date })
   render() {
     return(
       <section className="mainStyle">
-        <Jumbotron className='text-center bg-transparent'>
-         <div className='opacity'><br/>
-          <h1>Hello, StudentName!</h1>
+        <Jumbotron className="text-center bg-transparent">
+         <div className="opacity"><br/>
+          <h1 className="font-weight-bold">Hello, StudentName!</h1>
           <p>This is a simple hero unit, a simple jumbotron-style component for calling
            extra attention to featured content or information.
           </p><br/><br/>
@@ -36,29 +36,29 @@ onChange = date => this.setState({ date })
             <MDBCol md="3"></MDBCol>
             <MDBCol md="6">
             <Form onSubmit={this.props.submitValues}>
-              <Form.Group>
-                <label htmlFor="customRange1">Course Evaluation</label>
+              <Form.Group className="opacity ">
+                <label htmlFor="customRange1" className="font-weight-bold black-text ml-2 mt-1">Course Evaluation</label>
                 <div className="d-flex justify-content-center my-6">
-                  <span className="font-weight-bold blue-text mr-2 mt-1">0%</span>
+                  <span className="font-weight-bold red-text mr-2 mt-1">0%</span>
                   <form className="range-field w-50">
                   <input onChange={this.props.changeCoursValue} value={this.props.courseEvaluation} type="range" step="1" className="custom-range" id="customRange1" />
                   </form>
-                  <span className="font-weight-bold blue-text ml-2 mt-1">100%</span>
+                  <span className="font-weight-bold green-text ml-2 mt-1">100%</span>
                 </div>
-                <label htmlFor="customRange1">Teacher Evaluation</label>
+                <label htmlFor="customRange1" className="font-weight-bold black-text ml-2 mt-1">Teacher Evaluation</label>
                 <div className="d-flex justify-content-center my-6">
-                  <span className="font-weight-bold blue-text mr-2 mt-1">0%</span>
+                  <span className="font-weight-bold red-text mr-2 mt-1">0%</span>
                   <form className="range-field w-50">
                   <input onChange={this.props.changeValue} value={this.props.TeacherEvaluation} type="range" step="1" className="custom-range" id="customRange1" />
                   </form>
-                  <span className="font-weight-bold blue-text ml-2 mt-1">100%</span>
+                  <span className="font-weight-bold green-text ml-2 mt-1">100%</span>
                 </div>
               </Form.Group>
               <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>Your Opinion!</Form.Label>
+              <Form.Label className="font-weight-bold white-text ml-2 mt-1">Your Opinion!</Form.Label>
               <Form.Control onChange={this.props.updateStudentComnt} value={this.props.studentComent} as="textarea" rows="3" />
               </Form.Group >
-              <Button variant="secondary" type="submit">Submit</Button>
+              <Button variant="dark" type="submit">Submit</Button>
              </Form>
            </MDBCol>
           </MDBRow>

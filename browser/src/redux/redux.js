@@ -2,8 +2,8 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 
 const initialState = {dataFromServer:[],
-                      TeacherEvaluation:0,
-                      courseEvaluation:0,
+                      TeacherEvaluation:50,
+                      courseEvaluation:50,
                       studentComent:'',
                       courseEVarray:[],
                       teacherEVarray:[],
@@ -30,18 +30,9 @@ const reducer = (state = initialState, action) => {
       copyOfState.studentComent = changeStudentCom.value;
       return copyOfState;
     case 'SUBMIT':
-      copyOfState.courseEVarray.puch(copyOfState.courseEvaluation);
-      copyOfState.teacherEVarray.puch(copyOfState.TeacherEvaluation);
-      copyOfState.studentComArray.puch(copyOfState.studentComent);
       copyOfState.courseEvaluation = 0;
       copyOfState.TeacherEvaluation= 0;
       copyOfState.studentComent= '';
-      return copyOfState;
-    case 'AVCOURS':
-      copyOfState.averageCourseEV = action.event.target;
-      return copyOfState;
-    case 'AVTCHER':
-      copyOfState.averageTeacherEV = action.event.target;
       return copyOfState;
     case 'FETCHDATA':
       copyOfState.dataFromServer = '';
@@ -72,12 +63,6 @@ export const updateStudentComnt = ev => {
 }
 export const submitValues = ev => {
   return{type:'SUBMIT' , event: ev}
-}
-export const updateAVcourseEV = ev => {
-  return{type:'AVCOURS', event: ev}
-}
-export const updateAVteacherEV = ev => {
-  return{type:'AVTCHER', event: ev}
 }
 
 const allData = data => {
@@ -142,5 +127,98 @@ export const fetchFrom = () => {
 export const changeAction = payload => {
   return { type: 'CHANGE', payload: payload }
 }
+
+export const newClass = addClass => {
+  return function(dispatch) {
+    fetch('/class/createClass ', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(addClass)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+export const delClass = removeClass => {
+  return function(dispatch) {
+    fetch('/class/deleteClass  ', {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(removeClass)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+export const delTeacher = removeTrainer => {
+  return function(dispatch) {
+    fetch('/trainer/deleteTrainer  ', {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(removeTrainer)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+export const updateTeacher = update => {
+  return function(dispatch) {
+    fetch('/trainer/updateTrainer  ', {
+      method: 'put',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(update)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+export const addStudentTo = addSt => {
+  return function(dispatch) {
+    fetch('/student/addStudent ', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(addSt)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+export const delStudent = removeSt => {
+  return function(dispatch) {
+    fetch('/student/deleteStudent ', {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(removeSt)
+    })
+    .then(res => {
+      if (res.status === 400 || res.status === 404) {
+        throw new Error('Authentication failed');
+      }
+      return res.json();
+    })
+  }
+}
+
+
 
 export const store = createStore(reducer, applyMiddleware(thunk));
