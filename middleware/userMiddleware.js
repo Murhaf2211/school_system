@@ -3,7 +3,7 @@ const trainerModel = require('../models/trainerModel');
 const studentModel = require('../models/studentModel');
 const classesModel = require('../models/classesModel');
 const { possibleRoles } = require('../helpers/validateUserCreate');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
 const saltRounds = parseInt(process.env.SALT_ROUNDS);
@@ -18,7 +18,7 @@ const createUser = async (req, res, next) => {
       return res.status(400).json({msg: 'Username already exists'});
     }
 
-    req.body.password = await bcrypt.hash(req.body.password, saltRounds);
+    // req.body.password = await bcrypt.hash(req.body.password, saltRounds);
     await possibleCollections[findIndexCollection].create(req.body);
     return res.status(200).json({msg: 'The user was created'});
 
@@ -37,9 +37,9 @@ const loginUser = async(req, res, next)=>{
       return res.status(404).json({msg:'A user with the given role does not exist. Try again!'});
     }
 
-    const passwordMatches = await bcrypt.compare(req.body.password, findByUserName.password);
+    // const passwordMatches = await bcrypt.compare(req.body.password, findByUserName.password);
 
-    if(!passwordMatches) {
+    if(req.body.password !== findByUserName.password) {
       return res.status(400).json({msg:'Password invalid'});
     }
 
