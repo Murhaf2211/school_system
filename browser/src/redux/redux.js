@@ -2,7 +2,6 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 
 const initialState = {dataFromServer:[],
-
                       TeacherEvaluation:0,
                       userNameValue:'',
                       passwordValue:'',
@@ -22,10 +21,8 @@ const initialState = {dataFromServer:[],
                       classBelongStudentremove:'',
                       deleteClassValue:'',
                       courseEvaluation:0,
-
                       TeacherEvaluation:50,
                       courseEvaluation:50,
-
                       studentComent:'',
                       averageCourseEV:80,
                       averageTeacherEV:50,
@@ -58,8 +55,6 @@ const reducer = (state = initialState, action) => {
     case 'ERROR' :
       copyOfState.dataFromServer = action.payload.message;
       return copyOfState;
-
-
     case 'login':
      if (action.payload.target.getAttribute('type') === 'text') {
        copyOfState.userNameValue = action.payload.target.value;
@@ -68,10 +63,8 @@ const reducer = (state = initialState, action) => {
      } else  {
        copyOfState.selectOptionSignIn = action.payload.target.value
      }
-
-    return copyOfState;
-
-      case 'signUp':
+      return copyOfState;
+     case 'signUp':
        if(action.payload.target.getAttribute('type')==='text') {
          copyOfState.userName_sign_up=action.payload.target.value;
        }  else if (action.payload.target.getAttribute('type')==='password') {
@@ -79,47 +72,33 @@ const reducer = (state = initialState, action) => {
        }   else {
          copyOfState.selectOption_sign_up=action.payload.target.value
        }
-
        return copyOfState;
-
-       case 'addClass' :
+      case 'addClass' :
        if (action.payload.target.getAttribute('identifier')==="first") {
              copyOfState.NameOfNewClassValue=action.payload.target.value;
 
        } else {
                copyOfState.NameOfNewTeacherValue=action.payload.target.value;
        }
-
          return copyOfState;
-
-         case 'deleteclass' :
+       case 'deleteclass' :
          copyOfState.deleteClassValue= action.payload.target.value;
-
          return copyOfState;
-
-
-
-         case 'UpdateTeacher' :
+       case 'UpdateTeacher' :
          if(action.payload.target.getAttribute('identifier')==='nameteacher') {
               copyOfState.changeTeacherVaule= action.payload.target.value;
          } else {
                copyOfState.classChangeTeacher= action.payload.target.value;
          }
-
           return copyOfState;
-
-         case 'deleteTeacher' :
+       case 'deleteTeacher' :
          if(action.payload.target.getAttribute('identifier')==='nameteacher') {
               copyOfState.deleteTeacherValue= action.payload.target.value;
          } else {
                copyOfState.classdeleteTeacher= action.payload.target.value;
          }
-
-
-
          return copyOfState;
-
-         case 'addStudent' :
+       case 'addStudent' :
          if(action.payload.target.getAttribute('identifier')==='student'){
 
            copyOfState.addstudentValue=action.payload.target.value;
@@ -127,9 +106,7 @@ const reducer = (state = initialState, action) => {
             copyOfState.classBelongStudentAdd=action.payload.target.value
          }
          return copyOfState;
-
-
-         case 'removestudent' :
+       case 'removestudent' :
          if(action.payload.target.getAttribute('identifier')==='student2'){
 
            copyOfState.removestudentValue=action.payload.target.value;
@@ -137,14 +114,10 @@ const reducer = (state = initialState, action) => {
             copyOfState.classBelongStudentremove=action.payload.target.value
          }
          return copyOfState;
-
-
       default:
-      return copyOfState;
+         return copyOfState;
   }
 }
-
-
 
 export const updateCourseEV = ev => {
   return{type:'updateCOURS', event: ev}
@@ -158,45 +131,30 @@ export const updateStudentComnt = ev => {
 export const submitValues = ev => {
   return{type:'SUBMIT' , event: ev}
 }
-
 export const loginFunction = payload => {
   return { type: 'login', payload:payload }
 }
-
 export const signUpfunction = payload => {
-
   return {type:'signUp',payload:payload}
 }
-
 export const addClassFunction =payload =>{
-
   return {type:'addClass',payload:payload}
 }
-
-
 export const changeTeacherFunction = payload =>{
-
   return {type:'UpdateTeacher',payload:payload}
 }
-
 export const deleteTeacherFunction = payload =>{
-
   return {type:'deleteTeacher',payload:payload}
 }
-
 export const addStudentFunction = payload =>{
   return {type:'addStudent',payload:payload}
 }
-
 export const removeStudentFunction = payload =>{
   return {type:'removestudent', payload:payload}
 }
 export const deleteClassFunction = payload =>{
   return {type:'deleteclass', payload:payload}
 }
-
-
-
 
 const allData = data => {
   return{
@@ -211,9 +169,6 @@ const badRequest = error => {
    payload :error
  }
 }
-
-
-
 
 export const loginFetch = credentials2 => {
   return function(dispatch) {
@@ -242,7 +197,6 @@ export const loginFetch = credentials2 => {
   }
 }
 
-
 export const signUpFetch = credentials => {
   return function(dispatch) {
     console.log(credentials);
@@ -270,8 +224,6 @@ export const signUpFetch = credentials => {
   }
 }
 
-
-
 export const newClass = addClass => {
   return function(dispatch) {
     console.log(addClass);
@@ -289,9 +241,6 @@ export const newClass = addClass => {
   }
 }
 
-
-
-
 export const updateTeacher = update => {
   return function(dispatch) {
     console.log(update);
@@ -308,7 +257,6 @@ export const updateTeacher = update => {
     })
   }
 }
-
 
 export const delTeacher = removeTrainer => {
   return function(dispatch) {
@@ -399,98 +347,6 @@ export const fetchFrom = () => {
     })
     .catch(err => {
       dispatch(badRequest(err))
-    })
-  }
-}
-
-
-export const newClass = addClass => {
-  return function(dispatch) {
-    fetch('/class/createClass ', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(addClass)
-    })
-    .then(res => {
-      if (res.status === 400 || res.status === 404) {
-        throw new Error('Authentication failed');
-      }
-      return res.json();
-    })
-  }
-}
-export const delClass = removeClass => {
-  return function(dispatch) {
-    fetch('/class/deleteClass  ', {
-      method: 'delete',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(removeClass)
-    })
-    .then(res => {
-      if (res.status === 400 || res.status === 404) {
-        throw new Error('Authentication failed');
-      }
-      return res.json();
-    })
-  }
-}
-export const delTeacher = removeTrainer => {
-  return function(dispatch) {
-    fetch('/trainer/deleteTrainer  ', {
-      method: 'delete',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(removeTrainer)
-    })
-    .then(res => {
-      if (res.status === 400 || res.status === 404) {
-        throw new Error('Authentication failed');
-      }
-      return res.json();
-    })
-  }
-}
-export const updateTeacher = update => {
-  return function(dispatch) {
-    fetch('/trainer/updateTrainer  ', {
-      method: 'put',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(update)
-    })
-    .then(res => {
-      if (res.status === 400 || res.status === 404) {
-        throw new Error('Authentication failed');
-      }
-      return res.json();
-    })
-  }
-}
-export const addStudentTo = addSt => {
-  return function(dispatch) {
-    fetch('/student/addStudent ', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(addSt)
-    })
-    .then(res => {
-      if (res.status === 400 || res.status === 404) {
-        throw new Error('Authentication failed');
-      }
-      return res.json();
-    })
-  }
-}
-export const delStudent = removeSt => {
-  return function(dispatch) {
-    fetch('/student/deleteStudent ', {
-      method: 'delete',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(removeSt)
-    })
-    .then(res => {
-      if (res.status === 400 || res.status === 404) {
-        throw new Error('Authentication failed');
-      }
-      return res.json();
     })
   }
 }
